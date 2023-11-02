@@ -3,10 +3,9 @@ const dbConfig = require("./dbConfig"); // Config file holds DB credentials
 
 const queriesCreate = [
     "CREATE TABLE LOCATIONS (location_id INT IDENTITY(1,1) PRIMARY KEY, name VARCHAR(255) NOT NULL, address VARCHAR(255) NOT NULL);",
-    "CREATE TABLE ITEMS (item_id INT IDENTITY(1,1) PRIMARY KEY, item_name VARCHAR(255) NOT NULL, item_category VARCHAR(255) NOT NULL, expiry DATE NOT NULL, quantity INT NOT NULL, location_id INT NOT NULL, FOREIGN KEY (location_id) REFERENCES LOCATIONS(location_id));",
+    "CREATE TABLE ITEMS (item_id INT IDENTITY(1,1) PRIMARY KEY, item_name VARCHAR(255) NOT NULL, quantity INT NOT NULL, location_id INT NOT NULL, FOREIGN KEY (location_id) REFERENCES LOCATIONS(location_id));",
     "CREATE TABLE EMERGENCY_PACKS (pack_id INT IDENTITY(1,1) PRIMARY KEY, item_name VARCHAR(255) NOT NULL, expiry DATE NOT NULL, quantity INT NOT NULL, location_id INT NOT NULL, FOREIGN KEY (location_id) REFERENCES LOCATIONS(location_id));",
     "CREATE TABLE ADMINS (admin_id INT IDENTITY(1,1) PRIMARY KEY, username VARCHAR(255) NOT NULL, password VARCHAR(255) NOT NULL, first_name VARCHAR(255) NOT NULL, last_name VARCHAR(255) NOT NULL, location_id INT NOT NULL, FOREIGN KEY (location_id) REFERENCES LOCATIONS(location_id));",
-    "CREATE TABLE USERS (user_id INT IDENTITY(1,1) PRIMARY KEY, first_name VARCHAR(255) NOT NULL, last_name VARCHAR(255) NOT NULL, swipes_remaining INT NOT NULL, location_id INT NOT NULL, FOREIGN KEY (location_id) REFERENCES LOCATIONS(location_id));",
 ];
 
 const queriesShowTables = [
@@ -14,14 +13,12 @@ const queriesShowTables = [
     "SELECT * FROM ITEMS",
     "SELECT * FROM EMERGENCY_PACKS",
     "SELECT * FROM ADMINS",
-    "SELECT * FROM USERS;",
 ];
 
 const queriesDropTables = [
     "DROP TABLE ITEMS",
     "DROP TABLE EMERGENCY_PACKS",
     "DROP TABLE ADMINS",
-    "DROP TABLE USERS",
     "DROP TABLE LOCATIONS",
 ];
 
