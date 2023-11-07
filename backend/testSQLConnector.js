@@ -108,6 +108,17 @@ async function insertItemsTable(conn) {
     }
 }
 
+async function insertAdminTable(conn) {
+    try {
+        for (let query of queriesAdminInsert) {
+            const result = await conn.request().query(query);
+            console.log(result.recordset);
+        }
+    } catch (error) {
+        console.error("Show tables error:", error);
+    }
+}
+
 async function dropTables(conn) {
     try {
         for (let query of queriesDropTables) {
@@ -135,6 +146,9 @@ async function main() {
 
         // Insert into ITEMS table
         // await insertItemsTable(conn);
+
+        // Insert into ADMIN table 
+        // await insertAdminTable(conn);
 
         // Drop tables
         // await dropTables(conn);
