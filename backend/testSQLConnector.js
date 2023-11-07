@@ -48,6 +48,12 @@ const queriesItemsInsert = [
     "INSERT INTO ITEMS (item_name, quantity, location_id) VALUES ('Apple sauce', 10, 1);",
 ];
 
+const queriesAdminInsert = [
+    "INSERT INTO ADMINS (username, password, first_name, last_name, location_id) VALUES ('AH', '1234', 'Amanuel', 'Hailemariam', 1);",
+    "INSERT INTO ADMINS (username, password, first_name, last_name, location_id) VALUES ('AK', '5678', 'Andrew', 'Kim', 1);",
+
+]
+
 async function connect() {
     try {
         const pool = await mssql.connect(dbConfig);
