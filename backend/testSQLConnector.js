@@ -22,6 +22,16 @@ const queriesDropTables = [
     "DROP TABLE LOCATIONS",
 ];
 
+const queriesLocationsInsert = [
+    "INSERT INTO LOCATIONS (name, address) VALUES ('Tiger Pantry', '299 Hitt St, Columbia, MO 65201');",
+];
+
+const queriesItemsInsert = [
+    "INSERT INTO ITEMS (item_name, quantity, location_id) VALUES ('Canned Green Beans', 10, 1);",
+    "INSERT INTO ITEMS (item_name, quantity, location_id) VALUES ('Canned Red Beans', 10, 1);",
+    "INSERT INTO ITEMS (item_name, quantity, location_id) VALUES ('Canned Black Beans', 10, 1);",
+];
+
 async function connect() {
     try {
         const pool = await mssql.connect(dbConfig);
@@ -54,6 +64,28 @@ async function showTables(conn) {
     }
 }
 
+async function insertLocationsTable(conn) {
+    try {
+        for (let query of queriesLocationsInsert) {
+            const result = await conn.request().query(query);
+            console.log(result.recordset);
+        }
+    } catch (error) {
+        console.error("Show tables error:", error);
+    }
+}
+
+async function insertItemsTable(conn) {
+    try {
+        for (let query of queriesItemsInsert) {
+            const result = await conn.request().query(query);
+            console.log(result.recordset);
+        }
+    } catch (error) {
+        console.error("Show tables error:", error);
+    }
+}
+
 async function dropTables(conn) {
     try {
         for (let query of queriesDropTables) {
@@ -76,8 +108,11 @@ async function main() {
 
         // await showTables(conn);
 
-        // Insert into tables
-        // TODO
+        // Insert into LOCATIONS table
+        // await insertLocationsTable(conn);
+
+        // Insert into ITEMS table
+        // await insertItemsTable(conn);
 
         // Drop tables
         // await dropTables(conn);
