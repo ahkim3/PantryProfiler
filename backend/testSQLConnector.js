@@ -27,9 +27,25 @@ const queriesLocationsInsert = [
 ];
 
 const queriesItemsInsert = [
-    "INSERT INTO ITEMS (item_name, quantity, location_id) VALUES ('Canned Green Beans', 10, 1);",
-    "INSERT INTO ITEMS (item_name, quantity, location_id) VALUES ('Canned Red Beans', 10, 1);",
-    "INSERT INTO ITEMS (item_name, quantity, location_id) VALUES ('Canned Black Beans', 10, 1);",
+    "INSERT INTO ITEMS (item_name, quantity, location_id) VALUES ('Flour', 10, 1);",
+    "INSERT INTO ITEMS (item_name, quantity, location_id) VALUES ('Sugar', 10, 1);",
+    "INSERT INTO ITEMS (item_name, quantity, location_id) VALUES ('Vegetable oil (big and small)', 10, 1);",
+    "INSERT INTO ITEMS (item_name, quantity, location_id) VALUES ('Canola Oil', 10, 1);",
+    "INSERT INTO ITEMS (item_name, quantity, location_id) VALUES ('Canned meat', 10, 1);",
+    "INSERT INTO ITEMS (item_name, quantity, location_id) VALUES ('Peanut butter', 10, 1);",
+    "INSERT INTO ITEMS (item_name, quantity, location_id) VALUES ('Jelly', 10, 1);",
+    "INSERT INTO ITEMS (item_name, quantity, location_id) VALUES ('White rice', 10, 1);",
+    "INSERT INTO ITEMS (item_name, quantity, location_id) VALUES ('Brown rice', 10, 1);",
+    "INSERT INTO ITEMS (item_name, quantity, location_id) VALUES ('Tomato sauce', 10, 1);",
+    "INSERT INTO ITEMS (item_name, quantity, location_id) VALUES ('Broth', 10, 1);",
+    "INSERT INTO ITEMS (item_name, quantity, location_id) VALUES ('Soy sauce', 10, 1);",
+    "INSERT INTO ITEMS (item_name, quantity, location_id) VALUES ('Tortillas', 10, 1);",
+    "INSERT INTO ITEMS (item_name, quantity, location_id) VALUES ('Ramen', 10, 1);",
+    "INSERT INTO ITEMS (item_name, quantity, location_id) VALUES ('Granola bar (GF)', 10, 1);",
+    "INSERT INTO ITEMS (item_name, quantity, location_id) VALUES ('Mac and cheese', 10, 1);",
+    "INSERT INTO ITEMS (item_name, quantity, location_id) VALUES ('Pasta', 10, 1);",
+    "INSERT INTO ITEMS (item_name, quantity, location_id) VALUES ('Meals to go', 10, 1);",
+    "INSERT INTO ITEMS (item_name, quantity, location_id) VALUES ('Apple sauce', 10, 1);",
 ];
 
 async function connect() {
