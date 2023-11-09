@@ -48,11 +48,37 @@ const queriesItemsInsert = [
     "INSERT INTO ITEMS (item_name, quantity, location_id) VALUES ('Apple sauce', 10, 1);",
 ];
 
-const queriesAdminInsert = [
-    "INSERT INTO ADMINS (username, password, first_name, last_name, location_id) VALUES ('AH', '1234', 'Amanuel', 'Hailemariam', 1);",
-    "INSERT INTO ADMINS (username, password, first_name, last_name, location_id) VALUES ('AK', '5678', 'Andrew', 'Kim', 1);",
+//const queriesAdminInsert = [
+   // "INSERT INTO ADMINS (username, password, first_name, last_name, location_id) VALUES ('AH', '1234', 'Amanuel', 'Hailemariam', 1);",
+   // "INSERT INTO ADMINS (username, password, first_name, last_name, location_id) VALUES ('AK', '5678', 'Andrew', 'Kim', 1);",
 
-]
+//]
+
+const bcrypt = require('bcrypt');
+const mysql = require('mysql');
+
+const connection = mysql.createConnection({
+  host: 'your_database_host',
+  user: 'your_database_username',
+  password: 'your_database_password',
+  database: 'your_database_name'
+});
+
+const queriesAdminInsert = [
+    { username: 'AH', password: '1234', first_name: 'Amanuel', last_name: 'Hailemariam', location_id: 1 },
+    { username: 'AK', password: '5678', first_name: 'Andrew', last_name: 'Kim', location_id: 1 }
+];
+
+// Function to hash passwords using bcrypt
+async function hashPasswords() {
+    for (const admin of queriesAdminInsert) {
+        const hashedPassword = await bcrypt.hash(admin.password, 10);
+        admin.password = hashedPassword;
+    }
+}
+
+
+
 
 async function connect() {
     try {
@@ -149,6 +175,20 @@ async function main() {
 
         // Insert into ADMIN table 
         // await insertAdminTable(conn);
+
+        // Insert hashed passwords into the database
+        hashPasswords().then(() => {
+            connection.connect();
+            for (const admin of queriesAdminInsert) {
+                const { username, password, first_name, last_name, location_id } = admin;
+                const query = `INSERT INTO ADMINS (username, password, first_name, last_name, location_id) VALUES ('${username}', '${password}', '${first_name}', '${last_name}', ${location_id})`;
+                connection.query(query, (error, results, fields) => {
+                    if (error) throw error;
+                    console.log('Admin added successfully');
+                });
+            }
+            connection.end();
+        });
 
         // Drop tables
         // await dropTables(conn);
