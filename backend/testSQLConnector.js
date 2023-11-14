@@ -1,5 +1,7 @@
-const mssql = require("mssql");
+const mssql = require("mssql"); // Azure connector API
+const bcrypt = require("bcrypt"); // Password encryption API
 const dbConfig = require("./dbConfig"); // Config file holds DB credentials
+const queriesAdminInsert = require("./queriesAdminInsert"); // Admin data to insert into DB
 
 const queriesCreate = [
     "CREATE TABLE LOCATIONS (location_id INT IDENTITY(1,1) PRIMARY KEY, name VARCHAR(255) NOT NULL, address VARCHAR(255) NOT NULL);",
@@ -48,9 +50,17 @@ const queriesItemsInsert = [
     "INSERT INTO ITEMS (item_name, quantity, location_id) VALUES ('Apple sauce', 10, 1);",
 ];
 
-const queriesEmergency_PacksInsert = [
+const queriesEmergencyPacksInsert = [
     "INSERT INTO EMERGENCY_PACKS (item_name, quantity, location_id) VALUES ('E-PACK', 10, 1);"
 ]
+
+// Function to hash passwords using bcrypt
+async function hashPasswords() {
+    for (const admin of queriesAdminInsert) {
+        const hashedPassword = await bcrypt.hash(admin.password, 10);
+        admin.password = hashedPassword;
+    }
+}
 
 async function connect() {
     try {
@@ -106,9 +116,30 @@ async function insertItemsTable(conn) {
     }
 }
 
-async function insertEmergency_PacksTable(conn) {
+async function insertAdminTable(conn) {
     try {
-        for (let query of queriesEmergency_PacksInsert) {
+        if (!conn.connected) {
+            console.error("Connection is closed. Reconnecting...");
+            await conn.connect();
+        }
+
+        for (const admin of queriesAdminInsert) {
+            let {admin_id, password, first_name, last_name, location_id} =
+                admin;
+            admin_id = admin_id.toUpperCase(); // Capitalize admin_id
+
+            const query = `INSERT INTO ADMINS (admin_id, password, first_name, last_name, location_id) VALUES ('${admin_id}', '${password}', '${first_name}', '${last_name}', ${location_id})`;
+            const result = await conn.request().query(query);
+            console.log(result.recordset);
+        }
+    } catch (error) {
+        console.error("Show tables error:", error);
+    }
+}
+
+async function insertEmergencyPacksTable(conn) {
+    try {
+        for (let query of queriesEmergencyPacksInsert) {
             const result = await conn.request().query(query);
             console.log(result.recordset);
         }
@@ -136,7 +167,6 @@ async function main() {
         // await createTables(conn);
 
         // List tables
-
         // await showTables(conn);
 
         // Insert into LOCATIONS table
@@ -145,8 +175,14 @@ async function main() {
         // Insert into ITEMS table
         // await insertItemsTable(conn);
 
+        // Insert into ADMIN table
+        // await insertAdminTable(conn);
+
+        // Insert hashed passwords into the database
+        // hashPasswords().then(() => insertAdminTable(conn));
+
         // Insert into EMERGENCY_PACKS
-        // await insertEmergency_PacksTable(conn);
+        // await insertEmergencyPacksTable(conn);
 
         // Drop tables
         // await dropTables(conn);
