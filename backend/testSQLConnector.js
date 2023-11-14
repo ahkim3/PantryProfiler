@@ -1,12 +1,13 @@
-const mssql = require("mssql");
+const mssql = require("mssql"); // Azure connector API
+const bcrypt = require("bcrypt"); // Password encryption API
 const dbConfig = require("./dbConfig"); // Config file holds DB credentials
 const queriesAdminInsert = require("./queriesAdminInsert"); // Admin data to insert into DB
 
 const queriesCreate = [
     "CREATE TABLE LOCATIONS (location_id INT IDENTITY(1,1) PRIMARY KEY, name VARCHAR(255) NOT NULL, address VARCHAR(255) NOT NULL);",
     "CREATE TABLE ITEMS (item_id INT IDENTITY(1,1) PRIMARY KEY, item_name VARCHAR(255) NOT NULL, quantity INT NOT NULL, location_id INT NOT NULL, FOREIGN KEY (location_id) REFERENCES LOCATIONS(location_id));",
-    "CREATE TABLE EMERGENCY_PACKS (pack_id INT IDENTITY(1,1) PRIMARY KEY, item_name VARCHAR(255) NOT NULL, expiry DATE NOT NULL, quantity INT NOT NULL, location_id INT NOT NULL, FOREIGN KEY (location_id) REFERENCES LOCATIONS(location_id));",
-    "CREATE TABLE ADMINS (admin_id INT IDENTITY(1,1) PRIMARY KEY, username VARCHAR(255) NOT NULL, password VARCHAR(255) NOT NULL, first_name VARCHAR(255) NOT NULL, last_name VARCHAR(255) NOT NULL, location_id INT NOT NULL, FOREIGN KEY (location_id) REFERENCES LOCATIONS(location_id));",
+    "CREATE TABLE EMERGENCY_PACKS (pack_id INT IDENTITY(1,1) PRIMARY KEY, item_name VARCHAR(255) NOT NULL, quantity INT NOT NULL, location_id INT NOT NULL, FOREIGN KEY (location_id) REFERENCES LOCATIONS(location_id));",
+    "CREATE TABLE ADMINS (admin_id VARCHAR(255) PRIMARY KEY NOT NULL, password VARCHAR(255) NOT NULL, first_name VARCHAR(255) NOT NULL, last_name VARCHAR(255) NOT NULL, location_id INT NOT NULL, FOREIGN KEY (location_id) REFERENCES LOCATIONS(location_id), UNIQUE(admin_id));",
 ];
 
 const queriesShowTables = [
@@ -49,8 +50,9 @@ const queriesItemsInsert = [
     "INSERT INTO ITEMS (item_name, quantity, location_id) VALUES ('Apple sauce', 10, 1);",
 ];
 
-const bcrypt = require("bcrypt");
-const mysql = require("mysql");
+const queriesEmergencyPacksInsert = [
+    "INSERT INTO EMERGENCY_PACKS (item_name, quantity, location_id) VALUES ('E-PACK', 10, 1);"
+]
 
 // Function to hash passwords using bcrypt
 async function hashPasswords() {
@@ -135,6 +137,17 @@ async function insertAdminTable(conn) {
     }
 }
 
+async function insertEmergencyPacksTable(conn) {
+    try {
+        for (let query of queriesEmergencyPacksInsert) {
+            const result = await conn.request().query(query);
+            console.log(result.recordset);
+        }
+    } catch (error) {
+        console.error("Show tables error:", error);
+    }
+}
+
 async function dropTables(conn) {
     try {
         for (let query of queriesDropTables) {
@@ -167,6 +180,9 @@ async function main() {
 
         // Insert hashed passwords into the database
         // hashPasswords().then(() => insertAdminTable(conn));
+
+        // Insert into EMERGENCY_PACKS
+        // await insertEmergencyPacksTable(conn);
 
         // Drop tables
         // await dropTables(conn);
