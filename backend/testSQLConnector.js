@@ -1,5 +1,6 @@
 const mssql = require("mssql");
 const dbConfig = require("./dbConfig"); // Config file holds DB credentials
+const queriesAdminInsert = require("./queriesAdminInsert"); // Admin data to insert into DB
 
 const queriesCreate = [
     "CREATE TABLE LOCATIONS (location_id INT IDENTITY(1,1) PRIMARY KEY, name VARCHAR(255) NOT NULL, address VARCHAR(255) NOT NULL);",
@@ -48,26 +49,8 @@ const queriesItemsInsert = [
     "INSERT INTO ITEMS (item_name, quantity, location_id) VALUES ('Apple sauce', 10, 1);",
 ];
 
-//const queriesAdminInsert = [
-   // "INSERT INTO ADMINS (username, password, first_name, last_name, location_id) VALUES ('AH', '1234', 'Amanuel', 'Hailemariam', 1);",
-   // "INSERT INTO ADMINS (username, password, first_name, last_name, location_id) VALUES ('AK', '5678', 'Andrew', 'Kim', 1);",
-
-//]
-
-const bcrypt = require('bcrypt');
-const mysql = require('mysql');
-
-const connection = mysql.createConnection({
-  host: 'your_database_host',
-  user: 'your_database_username',
-  password: 'your_database_password',
-  database: 'your_database_name'
-});
-
-const queriesAdminInsert = [
-    { username: 'AH', password: '1234', first_name: 'Amanuel', last_name: 'Hailemariam', location_id: 1 },
-    { username: 'AK', password: '5678', first_name: 'Andrew', last_name: 'Kim', location_id: 1 }
-];
+const bcrypt = require("bcrypt");
+const mysql = require("mysql");
 
 // Function to hash passwords using bcrypt
 async function hashPasswords() {
@@ -76,9 +59,6 @@ async function hashPasswords() {
         admin.password = hashedPassword;
     }
 }
-
-
-
 
 async function connect() {
     try {
@@ -136,7 +116,17 @@ async function insertItemsTable(conn) {
 
 async function insertAdminTable(conn) {
     try {
-        for (let query of queriesAdminInsert) {
+        if (!conn.connected) {
+            console.error("Connection is closed. Reconnecting...");
+            await conn.connect();
+        }
+
+        for (const admin of queriesAdminInsert) {
+            let {admin_id, password, first_name, last_name, location_id} =
+                admin;
+            admin_id = admin_id.toUpperCase(); // Capitalize admin_id
+
+            const query = `INSERT INTO ADMINS (admin_id, password, first_name, last_name, location_id) VALUES ('${admin_id}', '${password}', '${first_name}', '${last_name}', ${location_id})`;
             const result = await conn.request().query(query);
             console.log(result.recordset);
         }
@@ -164,7 +154,6 @@ async function main() {
         // await createTables(conn);
 
         // List tables
-
         // await showTables(conn);
 
         // Insert into LOCATIONS table
@@ -173,22 +162,11 @@ async function main() {
         // Insert into ITEMS table
         // await insertItemsTable(conn);
 
-        // Insert into ADMIN table 
+        // Insert into ADMIN table
         // await insertAdminTable(conn);
 
         // Insert hashed passwords into the database
-        hashPasswords().then(() => {
-            connection.connect();
-            for (const admin of queriesAdminInsert) {
-                const { username, password, first_name, last_name, location_id } = admin;
-                const query = `INSERT INTO ADMINS (username, password, first_name, last_name, location_id) VALUES ('${username}', '${password}', '${first_name}', '${last_name}', ${location_id})`;
-                connection.query(query, (error, results, fields) => {
-                    if (error) throw error;
-                    console.log('Admin added successfully');
-                });
-            }
-            connection.end();
-        });
+        // hashPasswords().then(() => insertAdminTable(conn));
 
         // Drop tables
         // await dropTables(conn);
