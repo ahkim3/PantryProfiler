@@ -51,8 +51,8 @@ const queriesItemsInsert = [
 ];
 
 const queriesEmergencyPacksInsert = [
-    "INSERT INTO EMERGENCY_PACKS (item_name, quantity, location_id) VALUES ('E-PACK', 10, 1);"
-]
+    "INSERT INTO EMERGENCY_PACKS (item_name, quantity, location_id) VALUES ('E-PACK', 10, 1);",
+];
 
 // Function to hash passwords using bcrypt
 async function hashPasswords() {
