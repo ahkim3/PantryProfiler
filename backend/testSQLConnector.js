@@ -145,6 +145,9 @@ async function main() {
         // Insert into ITEMS table
         // await insertItemsTable(conn);
 
+        // Insert into EMERGENCY_PACKS
+        // await insertEmergency_PacksTable(conn);
+
         // Drop tables
         // await dropTables(conn);
 
