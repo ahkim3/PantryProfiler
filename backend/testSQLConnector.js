@@ -48,6 +48,10 @@ const queriesItemsInsert = [
     "INSERT INTO ITEMS (item_name, quantity, location_id) VALUES ('Apple sauce', 10, 1);",
 ];
 
+const queriesEmergency_PacksInsert = [
+    "INSERT INTO EMERGENCY_PACKS (item_name, quantity, location_id) VALUES ('E-PACK', 10, 1);"
+]
+
 async function connect() {
     try {
         const pool = await mssql.connect(dbConfig);
@@ -94,6 +98,17 @@ async function insertLocationsTable(conn) {
 async function insertItemsTable(conn) {
     try {
         for (let query of queriesItemsInsert) {
+            const result = await conn.request().query(query);
+            console.log(result.recordset);
+        }
+    } catch (error) {
+        console.error("Show tables error:", error);
+    }
+}
+
+async function insertEmergency_PacksTable(conn) {
+    try {
+        for (let query of queriesEmergency_PacksInsert) {
             const result = await conn.request().query(query);
             console.log(result.recordset);
         }
