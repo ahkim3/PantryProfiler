@@ -48,6 +48,11 @@ const queriesItemsInsert = [
     "INSERT INTO ITEMS (item_name, quantity, location_id) VALUES ('Pasta', 10, 1);",
     "INSERT INTO ITEMS (item_name, quantity, location_id) VALUES ('Meals to go', 10, 1);",
     "INSERT INTO ITEMS (item_name, quantity, location_id) VALUES ('Apple sauce', 10, 1);",
+    "INSERT INTO ITEMS (item_name, quantity, location_id) VALUES ('Feminie hygiene products', 10, 1);",
+    "INSERT INTO ITEMS (item_name, quantity, location_id) VALUES ('Deodorant', 10, 1)",
+    "INSERT INTO ITEMS (item_name, quantity, location_id) VALUES ('Hand sanitizer', 10, 1);",
+    "INSERT INTO ITEMS (item_name, quantity, location_id) VALUES ('Household products', 10, 1);",
+    "INSERT INTO ITEMS (item_name, quantity, location_id) VALUES ('Body care', 10, 1);",
 ];
 
 const queriesEmergencyPacksInsert = [
