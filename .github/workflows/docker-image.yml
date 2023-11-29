@@ -14,5 +14,5 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    - name: Build the Docker image
-      run: docker build ./backend --file Dockerfile --tag pantryprofiler-api:$(date +%s)
+    - name: Build the Docker image for the API
+      run: docker build -t pantryprofiler-api:$(date +%s) ./backend
