@@ -39,12 +39,13 @@ jobs:
       - name: Build and push the Docker image for the API
         run: |
           docker build -t ${{ env.API_IMAGE_TAG }} ./backend
-          docker push ${{ env.API_IMAGE_TAG }}
+          docker run -e DB_SERVER="${{ secrets.DB_SERVER }}" \
+                      -e DB_NAME="${{ secrets.DB_NAME }}" \
+                      -e DB_USER="${{ secrets.DB_USER }}" \
+                      -e DB_PASSWORD="${{ secrets.DB_PASSWORD }}" \
+                      ${{ env.API_IMAGE_TAG }}
         env:
-          DB_SERVER: ${{ secrets.DB_SERVER }}
-          DB_NAME: ${{ secrets.DB_NAME }}
-          DB_USER: ${{ secrets.DB_USER }}
-          DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+          API_IMAGE_TAG: ${{ env.API_IMAGE_TAG }}
 
     # - name: Build and push the Docker image for the UI
     #   uses: docker/build-push-action@f2a1d5e99d037542a71f64918e516c093c6f3fc4
