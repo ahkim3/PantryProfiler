@@ -4,10 +4,10 @@ const express = require("express"); // Express API
 
 // const dbConfig = require("./dbConfig"); // Config file holds DB credentials (relative path)
 // Grab DB credentials from environment variables
-const DB_SERVER = process.env.DB_SERVER;
-const DB_NAME = process.env.DB_NAME;
-const DB_USER = process.env.DB_USER;
-const DB_PASSWORD = process.env.DB_PASSWORD;
+const DB_SERVER = process.env.INPUT_DB_SERVER;
+const DB_NAME = process.env.INPUT_DB_NAME;
+const DB_USER = process.env.INPUT_DB_USER;
+const DB_PASSWORD = process.env.INPUT_DB_PASSWORD;
 
 const dbConfig = {
     server: DB_SERVER,
