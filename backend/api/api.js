@@ -2,7 +2,8 @@ const mssql = require("mssql"); // Azure connector API
 const bcrypt = require("bcrypt"); // Password encryption API
 const express = require("express"); // Express API
 
-const dbConfig = require("./dbConfig"); // Config file holds DB credentials
+const dbConfig = JSON.parse(process.env.DB_CONFIG); // Config file holds DB credentials (env variable)
+// const dbConfig = require("./dbConfig"); // Config file holds DB credentials (relative path)
 
 const app = express();
 const port = 3000;

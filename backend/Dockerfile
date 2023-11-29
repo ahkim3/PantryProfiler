@@ -10,6 +10,9 @@ COPY package*.json ./
 # Install app dependencies
 RUN npm install
 
+# Set environment variables
+ENV DB_CONFIG=$DB_CONFIG
+
 # Bundle app source
 COPY . .
 

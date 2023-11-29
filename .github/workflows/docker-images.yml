@@ -40,6 +40,8 @@ jobs:
         run: |
           docker build -t ${{ env.API_IMAGE_TAG }} ./backend
           docker push ${{ env.API_IMAGE_TAG }}
+        env:
+          DB_CONFIG: ${{ secrets.DB_CONFIG }}
 
     # - name: Build and push the Docker image for the UI
     #   uses: docker/build-push-action@f2a1d5e99d037542a71f64918e516c093c6f3fc4
