@@ -8,8 +8,8 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  API_IMAGE_NAME: ${{ github.repository }}
-  UI_IMAGE_NAME: pantryprofiler-ui
+  API_IMAGE_TAG: ghcr.io/ahkim3/pantryprofiler-api:latest
+  UI_IMAGE_TAG: ghcr.io/ahkim3/pantryprofiler-ui:latest
 
 jobs:
   build-and-push-images:
@@ -23,6 +23,12 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v4
 
+    - name: Set up QEMU
+      uses: docker/setup-qemu-action@v3
+      
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v3
+
     - name: Log in to the Container registry
       uses: docker/login-action@65b78e6e13532edd9afa3aa52ac7964289d1a9c1
       with:
@@ -30,25 +36,10 @@ jobs:
         username: ${{ github.actor }}
         password: ${{ secrets.GITHUB_TOKEN }}
 
-    - name: Extract API metadata (tags, labels) for Docker
-      id: meta-api
-      uses: docker/metadata-action@9ec57ed1fcdbf14dcef7dfbe97b2010124a938b7
-      with:
-        images: ${{ env.REGISTRY }}/${{ env.API_IMAGE_NAME }}
-
-    - name: Extract UI metadata (tags, labels) for Docker
-      id: meta-ui
-      uses: docker/metadata-action@9ec57ed1fcdbf14dcef7dfbe97b2010124a938b7
-      with:
-        images: ${{ env.REGISTRY }}/${{ env.UI_IMAGE_NAME }}
-        
     - name: Build and push the Docker image for the API
-      uses: docker/build-push-action@f2a1d5e99d037542a71f64918e516c093c6f3fc4
-      with:
-        context: ./backend
-        push: true
-        tags: ${{ steps.meta-api.outputs.tags }}
-        labels: ${{ steps.meta-api.outputs.labels }}
+      run: |
+        docker build -t ${{ env.API_IMAGE_TAG }} ./backend
+        docker push ${{ env.API_IMAGE_TAG }}
         
     # - name: Build and push the Docker image for the UI
     #   uses: docker/build-push-action@f2a1d5e99d037542a71f64918e516c093c6f3fc4
