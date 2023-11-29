@@ -134,3 +134,5 @@ dbConfig.js
 queriesAdminInsert.js
 
 .DS_Store
+
+package-lock.json
