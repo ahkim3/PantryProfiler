@@ -186,6 +186,6 @@ app.post("/api/epacks/empty", async (req, res) => {
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
 
-    console.log(DB_SERVER);
-    console.log(DB_NAME);
+    console.log("Server: " + DB_SERVER);
+    console.log("Database: " + DB_NAME);
 });
