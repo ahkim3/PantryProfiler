@@ -9,9 +9,6 @@ const DB_NAME = process.env.DB_NAME;
 const DB_USER = process.env.DB_USER;
 const DB_PASSWORD = process.env.DB_PASSWORD;
 
-system.log(DB_SERVER);
-system.log(DB_NAME);
-
 const dbConfig = {
     server: DB_SERVER,
     database: DB_NAME,
@@ -188,4 +185,7 @@ app.post("/api/epacks/empty", async (req, res) => {
 // Start the server
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
+
+    console.log(DB_SERVER);
+    console.log(DB_NAME);
 });
