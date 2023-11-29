@@ -3,6 +3,7 @@ import { useState } from 'react';
 import NavBar from './NavBar';
 import './style/Update.css';
 
+
 const PantryUpdate = () => {
     const [inputs, setInputs] = useState({
         PantryItemName: '',

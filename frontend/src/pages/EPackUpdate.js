@@ -71,5 +71,4 @@ const EPackUpdate = () => {
           </div>
         );
       };
-
 export default EPackUpdate;

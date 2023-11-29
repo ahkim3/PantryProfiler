@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import NavBar from './NavBar';
+import axios from 'axios';
 
 const PantryCurrentInventory = () => {
   const [items, setItems] = useState([]);
@@ -8,6 +9,7 @@ const PantryCurrentInventory = () => {
     const fetchItems = async () => {
       try {
         // Make a POST request to your backend API endpoint
+        
         const response = await axios.post('/api/items/query', {
           location_id: 1 // Replace with the appropriate location ID or pass it dynamically
         });
@@ -52,5 +54,5 @@ const PantryCurrentInventory = () => {
     </div>
   );
 };
-      
+
 export default PantryCurrentInventory;

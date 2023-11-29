@@ -3,6 +3,7 @@ import React from 'react';
 import NavBar from './NavBar';
 
 const EPackLocations = () => {
+  
   return (
     <div>
         <NavBar />

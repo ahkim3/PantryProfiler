@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import NavBar from './NavBar';
 import './style/Menu.css';
 
+
 const PantryMenu = () => {
     return (
     <div>
