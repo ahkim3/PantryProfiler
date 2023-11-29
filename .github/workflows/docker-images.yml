@@ -8,8 +8,8 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  API_IMAGE_NAME: pantryprofiler-api:${{ date +%s }}
-  UI_IMAGE_NAME: pantryprofiler-ui:${{ date +%s }}
+  API_IMAGE_NAME: pantryprofiler-api
+  UI_IMAGE_NAME: pantryprofiler-ui
 
 jobs:
   build-and-push-images:
@@ -34,13 +34,13 @@ jobs:
       id: meta-api
       uses: docker/metadata-action@9ec57ed1fcdbf14dcef7dfbe97b2010124a938b7
       with:
-        images: ${{ env.REGISTRY }}/${{ env.API_IMAGE_NAME }}
+        images: ${{ env.REGISTRY }}/${{ env.API_IMAGE_NAME }}:${{ github.run_id }}
 
     - name: Extract UI metadata (tags, labels) for Docker
       id: meta-ui
       uses: docker/metadata-action@9ec57ed1fcdbf14dcef7dfbe97b2010124a938b7
       with:
-        images: ${{ env.REGISTRY }}/${{ env.UI_IMAGE_NAME }}
+        images: ${{ env.REGISTRY }}/${{ env.UI_IMAGE_NAME }}:${{ github.run_id }}
         
     - name: Build and push the Docker image for the API
       uses: docker/build-push-action@f2a1d5e99d037542a71f64918e516c093c6f3fc4
