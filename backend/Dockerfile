@@ -11,7 +11,10 @@ COPY package*.json ./
 RUN npm install
 
 # Set environment variables
-ENV DB_CONFIG=$DB_CONFIG
+ENV DB_SERVER=${DB_SERVER}
+ENV DB_NAME=${DB_NAME}
+ENV DB_USER=${DB_USER}
+ENV DB_PASSWORD=${DB_PASSWORD}
 
 # Bundle app source
 COPY . .
