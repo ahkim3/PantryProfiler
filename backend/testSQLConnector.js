@@ -26,6 +26,27 @@ const queriesDropTables = [
 
 const queriesLocationsInsert = [
     "INSERT INTO LOCATIONS (name, address) VALUES ('Tiger Pantry', '299 Hitt St, Columbia, MO 65201');",
+    "INSERT INTO LOCATIONS (name, address) VALUES ('Center for Student Involvement', '901 Rollins St, Columbia, MO 65211');",
+    "INSERT INTO LOCATIONS (name, address) VALUES ('College of Arts & Science', '512 S 9th St, Columbia, MO 65201');",
+    "INSERT INTO LOCATIONS (name, address) VALUES ('College of Education and Human Development', '526 Hitt St, Columbia, MO 65201');",
+    "INSERT INTO LOCATIONS (name, address) VALUES ('College of Engineering', '416 S 6th St, Columbia, MO 65201');",
+    "INSERT INTO LOCATIONS (name, address) VALUES ('College of Veterinary Medicine', '1520 East, Rollins St, Columbia, MO 65211');",
+    "INSERT INTO LOCATIONS (name, address) VALUES ('Counseling Center', '805 Rollins St, Columbia, MO 65201');",
+    "INSERT INTO LOCATIONS (name, address) VALUES ('Disability Center', 'S5 Memorial Union, Columbia, MO 65211');",
+    "INSERT INTO LOCATIONS (name, address) VALUES ('Gaines/Oldham Black Culture Center', '813 Virginia Ave, Columbia, MO 65201');",
+    "INSERT INTO LOCATIONS (name, address) VALUES ('Graduate School', '801 Conley Ave, Columbia, MO 65211');",
+    "INSERT INTO LOCATIONS (name, address) VALUES ('Hawthorn Hall', '903 Hitt St, Columbia, MO 65201');",
+    "INSERT INTO LOCATIONS (name, address) VALUES ('International Center', '518 Hitt St, Columbia, MO 65201');",
+    "INSERT INTO LOCATIONS (name, address) VALUES ('LGTBQ Resource Center', '901 Rollins St, Columbia, MO 65211');",
+    "INSERT INTO LOCATIONS (name, address) VALUES ('McReynolds Hall', '305 S 5th St, Columbia, MO 65201');",
+    "INSERT INTO LOCATIONS (name, address) VALUES ('MizzouRec', '1000 Rollins St, Columbia, MO 65203');",
+    "INSERT INTO LOCATIONS (name, address) VALUES ('Multicultural Center', '901 Rollins St, Columbia, MO 65211');",
+    "INSERT INTO LOCATIONS (name, address) VALUES ('Office of Accountability and Support', '901 Rollins St, Columbia, MO 65201');",
+    "INSERT INTO LOCATIONS (name, address) VALUES ('RSVP', '901 Rollins St, Columbia, MO 65201');",
+    "INSERT INTO LOCATIONS (name, address) VALUES ('Student Health Center', '1020 Hitt St, Columbia, MO 65211');",
+    "INSERT INTO LOCATIONS (name, address) VALUES ('Transfer Center', '909 Lowry Mall, Columbia, MO 65211');",
+    "INSERT INTO LOCATIONS (name, address) VALUES ('CASE', '110 Student Success Center, Columbia, MO 65211');",
+    "INSERT INTO LOCATIONS (name, address) VALUES ('TRIO Women's Center', '901 Rollins St, Columbia, MO 65201');",
 ];
 
 const queriesItemsInsert = [
