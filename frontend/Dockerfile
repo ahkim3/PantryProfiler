@@ -17,7 +17,9 @@ RUN npm install
 COPY . .
 
 # Expose the port the frontend runs on
-EXPOSE 3100
+#EXPOSE 3100 
+EXPOSE 80
+EXPOSE 443
 
 # Command to run application
 CMD ["npm", "start"]
