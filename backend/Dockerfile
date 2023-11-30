@@ -16,6 +16,10 @@ ENV DB_NAME=${DB_NAME}
 ENV DB_USER=${DB_USER}
 ENV DB_PASSWORD=${DB_PASSWORD}
 
+# Print environment variables (for troubleshooting)
+RUN echo "DB_SERVER=${DB_SERVER}" && \
+    echo "DB_NAME=${DB_NAME}"
+
 # Bundle app source
 COPY . .
 
