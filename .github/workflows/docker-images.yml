@@ -53,7 +53,7 @@ jobs:
         env:
           API_IMAGE_TAG: ${{ env.API_IMAGE_TAG }}
 
-    # - name: Build and push the Docker image for the UI
+      - name: Build and push the Docker image for the UI
         run: |
           docker build -t ${{ env.UI_IMAGE_TAG }} ./frontend
           docker push ${{ env.UI_IMAGE_TAG }}
