@@ -13,6 +13,7 @@ env:
 
 jobs:
   build-and-push-images:
+    environment: BUILD_ENV_DB_CONFIG
     runs-on: ubuntu-latest
 
     permissions:
