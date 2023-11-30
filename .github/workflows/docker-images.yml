@@ -54,9 +54,8 @@ jobs:
           API_IMAGE_TAG: ${{ env.API_IMAGE_TAG }}
 
     # - name: Build and push the Docker image for the UI
-    #   uses: docker/build-push-action@f2a1d5e99d037542a71f64918e516c093c6f3fc4
-    #   with:
-    #     context: ./frontend
-    #     push: true
-    #     tags: ${{ steps.meta-ui.outputs.tags }}
-    #     labels: ${{ steps.meta-ui.outputs.labels }}
+        run: |
+          docker build -t ${{ env.UI_IMAGE_TAG }} ./frontend
+          docker push ${{ env.UI_IMAGE_TAG }}
+        env:
+          API_IMAGE_TAG: ${{ env.UI_IMAGE_TAG }}

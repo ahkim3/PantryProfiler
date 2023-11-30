@@ -10,16 +10,11 @@ COPY package*.json ./
 # Install app dependencies
 RUN npm install
 
-# Set environment variables
-
-
 # Bundle app source
 COPY . .
 
 # Expose the port the frontend runs on
-EXPOSE 3000 
-# EXPOSE 80
-# EXPOSE 443
+EXPOSE 3000
 
 # Command to run application
 CMD ["npm", "start"]
