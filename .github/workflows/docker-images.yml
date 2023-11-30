@@ -39,13 +39,13 @@ jobs:
 
       - name: Build and push the Docker image for the API
         run: |
-          echo "DB_SERVER=${{ secrets.DB_SERVER }}"
-          echo "DB_NAME=${{ secrets.DB_NAME }}"
+          echo "DB_SERVER=testenvvar"
+          echo "DB_NAME=testenvvar"
           echo "DB_USER=${{ secrets.DB_USER }}"
           echo "DB_PASSWORD=${{ secrets.DB_PASSWORD }}"
           docker build -t ${{ env.API_IMAGE_TAG }} \
-          --build-arg DB_SERVER=${{ secrets.DB_SERVER }} \
-          --build-arg DB_NAME=${{ secrets.DB_NAME }} \
+          --build-arg DB_SERVER=testbuildarg \
+          --build-arg DB_NAME=testbuildarg \
           --build-arg DB_USER=${{ secrets.DB_USER }} \
           --build-arg DB_PASSWORD=${{ secrets.DB_PASSWORD }} \
           ./backend
