@@ -73,11 +73,32 @@ const queriesItemsInsert = [
     "INSERT INTO ITEMS (item_name, quantity, location_id) VALUES ('Deodorant', 10, 1)",
     "INSERT INTO ITEMS (item_name, quantity, location_id) VALUES ('Hand sanitizer', 10, 1);",
     "INSERT INTO ITEMS (item_name, quantity, location_id) VALUES ('Household products', 10, 1);",
-    "INSERT INTO ITEMS (item_name, quantity, location_id) VALUES ('Body care', 10, 1);",
+    "INSERT INTO ITEMS (item_name, quantity, location_id) VALUES ('Body care', 10, 1);"
 ];
 
 const queriesEmergencyPacksInsert = [
     "INSERT INTO EMERGENCY_PACKS (item_name, quantity, location_id) VALUES ('E-PACK', 10, 1);",
+    "INSERT INTO EMERGENCY_PACKS (item_name, quantity, location_id) VALUES ('E-PACK', 10, 2);",
+    "INSERT INTO EMERGENCY_PACKS (item_name, quantity, location_id) VALUES ('E-PACK', 10, 3);",
+    "INSERT INTO EMERGENCY_PACKS (item_name, quantity, location_id) VALUES ('E-PACK', 10, 4);",
+    "INSERT INTO EMERGENCY_PACKS (item_name, quantity, location_id) VALUES ('E-PACK', 10, 5);",
+    "INSERT INTO EMERGENCY_PACKS (item_name, quantity, location_id) VALUES ('E-PACK', 10, 6);",
+    "INSERT INTO EMERGENCY_PACKS (item_name, quantity, location_id) VALUES ('E-PACK', 10, 7);",
+    "INSERT INTO EMERGENCY_PACKS (item_name, quantity, location_id) VALUES ('E-PACK', 10, 8);",
+    "INSERT INTO EMERGENCY_PACKS (item_name, quantity, location_id) VALUES ('E-PACK', 10, 9);",
+    "INSERT INTO EMERGENCY_PACKS (item_name, quantity, location_id) VALUES ('E-PACK', 10, 10);",
+    "INSERT INTO EMERGENCY_PACKS (item_name, quantity, location_id) VALUES ('E-PACK', 10, 11);",
+    "INSERT INTO EMERGENCY_PACKS (item_name, quantity, location_id) VALUES ('E-PACK', 10, 12);",
+    "INSERT INTO EMERGENCY_PACKS (item_name, quantity, location_id) VALUES ('E-PACK', 10, 13);",
+    "INSERT INTO EMERGENCY_PACKS (item_name, quantity, location_id) VALUES ('E-PACK', 10, 14);",
+    "INSERT INTO EMERGENCY_PACKS (item_name, quantity, location_id) VALUES ('E-PACK', 10, 15);",
+    "INSERT INTO EMERGENCY_PACKS (item_name, quantity, location_id) VALUES ('E-PACK', 10, 16);",
+    "INSERT INTO EMERGENCY_PACKS (item_name, quantity, location_id) VALUES ('E-PACK', 10, 17);",
+    "INSERT INTO EMERGENCY_PACKS (item_name, quantity, location_id) VALUES ('E-PACK', 10, 18);",
+    "INSERT INTO EMERGENCY_PACKS (item_name, quantity, location_id) VALUES ('E-PACK', 10, 19);",
+    "INSERT INTO EMERGENCY_PACKS (item_name, quantity, location_id) VALUES ('E-PACK', 10, 20);",
+    "INSERT INTO EMERGENCY_PACKS (item_name, quantity, location_id) VALUES ('E-PACK', 10, 21);",
+    "INSERT INTO EMERGENCY_PACKS (item_name, quantity, location_id) VALUES ('E-PACK', 10, 22);"
 ];
 
 // Function to hash passwords using bcrypt
