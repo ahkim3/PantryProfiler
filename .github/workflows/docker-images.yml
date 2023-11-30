@@ -44,10 +44,10 @@ jobs:
           echo "DB_USER=${{ secrets.DB_USER }}"
           echo "DB_PASSWORD=${{ secrets.DB_PASSWORD }}"
           docker build -t ${{ env.API_IMAGE_TAG }} \
-          --build-arg DB_SERVER=testbuildarg \
-          --build-arg DB_NAME=testbuildarg \
-          --build-arg DB_USER=${{ secrets.DB_USER }} \
-          --build-arg DB_PASSWORD=${{ secrets.DB_PASSWORD }} \
+          --build-arg DB_SERVER_ARG=${{ secrets.DB_SERVER }} \
+          --build-arg DB_NAME_ARG=${{ secrets.DB_NAME }} \
+          --build-arg DB_USER_ARG=${{ secrets.DB_USER }} \
+          --build-arg DB_PASSWORD_ARG=${{ secrets.DB_PASSWORD }} \
           ./backend
           docker push ${{ env.API_IMAGE_TAG }}
         env:
