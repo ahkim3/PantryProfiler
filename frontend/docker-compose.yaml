@@ -1,0 +1,24 @@
+version: '24.0.5'
+
+services:
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: pantryprofiler-ui 
+    tty: true
+    expose:
+    - 80
+    - 443
+    ports:
+      - '3000:80'
+      - '3100:443'
+    networks:
+      - default
+    volumes:
+      - .:/frontend
+      - /frontend/node_modules
+    #environment:
+      # Define your environment variables here, if any
+      # e.g., NODE_ENV: production
+    restart: unless-stopped
