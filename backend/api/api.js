@@ -102,19 +102,18 @@ app.post("/api/items/update", async (req, res) => {
     }
 });
 
-// Handle POST request to query epacks by location
+// Handle POST request to query all epacks
 app.post("/api/epacks/query", async (req, res) => {
     try {
         await mssql.connect(dbConfig);
         const result = await mssql.query(
-            `SELECT * FROM EMERGENCY_PACKS WHERE location_id = ${req.body.location_id}`
+            `SELECT LOCATIONS.name AS location_name, quantity FROM EMERGENCY_PACKS JOIN LOCATIONS ON EMERGENCY_PACKS.location_id = LOCATIONS.location_id;`
         );
         res.json(result.recordset);
     } catch (err) {
         console.error(err);
         // Log info about the error
         console.log("Error occurred while querying epacks");
-        console.log(`location_id: ${req.body.location_id}`);
         res.status(500).send("Internal Server Error");
     } finally {
         await mssql.close();
