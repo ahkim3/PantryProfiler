@@ -81,7 +81,7 @@ app.post("/api/items/low-stock", async (req, res) => {
     }
 });
 
-// Handle POST request to update items by ID and location  this need to get changed to put 
+// Handle POST request to update items by ID and location 
 app.put("/api/items/update", async (req, res) => {
     try {
         await mssql.connect(dbConfig);
@@ -102,6 +102,59 @@ app.put("/api/items/update", async (req, res) => {
     }
 });
 
+// Handle put request to add items
+
+app.put("/api/items/update/add", async (req, res) => {
+    try {
+        await mssql.connect(dbConfig);
+
+        let new_quantity = req.body.add_quantity;
+        const newStockLevel = req.body.current_stock_level + req.body.adjustment + new_quantity;
+
+        const result = await mssql.query(
+            `UPDATE EMERGENCY_PACKS SET quantity = ${newStockLevel} WHERE pack_id = ${req.body.pack_id} AND location_id = ${req.body.location_id}`
+        );
+        res.json(result.recordset);
+    } catch (err) {
+        console.error(err);
+        // Log info about the error
+        console.log("Error occurred while updating epack stock level");
+        console.log(
+            `pack_id: ${req.body.pack_id}, location_id: ${req.body.location_id}, new_stock_level: ${req.body.new_stock_level}`
+        );
+        res.status(500).send("Internal Server Error");
+    } finally {
+        await mssql.close();
+    }
+});
+
+// Handle put request to subtract items 
+
+app.put("/api/items/update/subtract", async (req, res) => {
+    try {
+        await mssql.connect(dbConfig);
+
+        let subtract_quantity = req.body.subtract_quantity;
+        const newStockLevel = req.body.current_stock_level + req.body.adjustment - subtract_quantity;
+
+        const result = await mssql.query(
+            `UPDATE EMERGENCY_PACKS SET quantity = ${newStockLevel} WHERE pack_id = ${req.body.pack_id} AND location_id = ${req.body.location_id}`
+        );
+        res.json(result.recordset);
+    } catch (err) {
+        console.error(err);
+        // Log info about the error
+        console.log("Error occurred while updating epack stock level");
+        console.log(
+            `pack_id: ${req.body.pack_id}, location_id: ${req.body.location_id}, new_stock_level: ${req.body.new_stock_level}`
+        );
+        res.status(500).send("Internal Server Error");
+    } finally {
+        await mssql.close();
+    }
+});
+
+
 // Handle POST request to query all epacks
 app.post("/api/epacks/query", async (req, res) => {
     try {
@@ -120,7 +173,7 @@ app.post("/api/epacks/query", async (req, res) => {
     }
 });
 
-// Handle POST request to update epack by ID and location (change this to put)
+// Handle Put request to update epack by ID and location
 app.put("/api/epacks/update", async (req, res) => {
     try {
         await mssql.connect(dbConfig);
@@ -140,6 +193,59 @@ app.put("/api/epacks/update", async (req, res) => {
         await mssql.close();
     }
 });
+
+// Handle put request to add new epack by ID and location
+
+app.put("/api/epacks/update/add", async (req, res) => {
+    try {
+        await mssql.connect(dbConfig);
+
+        let new_quantity = req.body.add_quantity;
+        const newStockLevel = req.body.current_stock_level + req.body.adjustment + new_quantity;
+
+        const result = await mssql.query(
+            `UPDATE EMERGENCY_PACKS SET quantity = ${newStockLevel} WHERE pack_id = ${req.body.pack_id} AND location_id = ${req.body.location_id}`
+        );
+        res.json(result.recordset);
+    } catch (err) {
+        console.error(err);
+        // Log info about the error
+        console.log("Error occurred while updating epack stock level");
+        console.log(
+            `pack_id: ${req.body.pack_id}, location_id: ${req.body.location_id}, new_stock_level: ${req.body.new_stock_level}`
+        );
+        res.status(500).send("Internal Server Error");
+    } finally {
+        await mssql.close();
+    }
+});
+
+// Handle put request to subtract new epack by ID and location
+
+app.put("/api/epacks/update/subtract", async (req, res) => {
+    try {
+        await mssql.connect(dbConfig);
+
+        let subtract_quantity = req.body.subtract_quantity;
+        const newStockLevel = req.body.current_stock_level + req.body.adjustment - subtract_quantity;
+
+        const result = await mssql.query(
+            `UPDATE EMERGENCY_PACKS SET quantity = ${newStockLevel} WHERE pack_id = ${req.body.pack_id} AND location_id = ${req.body.location_id}`
+        );
+        res.json(result.recordset);
+    } catch (err) {
+        console.error(err);
+        // Log info about the error
+        console.log("Error occurred while updating epack stock level");
+        console.log(
+            `pack_id: ${req.body.pack_id}, location_id: ${req.body.location_id}, new_stock_level: ${req.body.new_stock_level}`
+        );
+        res.status(500).send("Internal Server Error");
+    } finally {
+        await mssql.close();
+    }
+});
+
 
 // Handle POST request to check for low epack levels
 app.post("/api/epacks/low-stock", async (req, res) => {
@@ -180,6 +286,10 @@ app.post("/api/epacks/empty", async (req, res) => {
         await mssql.close();
     }
 });
+
+//This handles calculation to update our items table. 
+
+
 
 // Start the server
 app.listen(port, () => {
