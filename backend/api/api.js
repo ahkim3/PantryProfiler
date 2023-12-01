@@ -45,7 +45,7 @@ app.get("/api/query", async (req, res) => {
 });
 
 // Handle POST request to query the Items table. Needs location ID.
-app.post("/api/items/query", async (req, res) => {
+app.get("/api/items/query", async (req, res) => {
     try {
         await mssql.connect(dbConfig);
         const result = await mssql.query(
