@@ -81,8 +81,8 @@ app.post("/api/items/low-stock", async (req, res) => {
     }
 });
 
-// Handle POST request to update items by ID and location
-app.post("/api/items/update", async (req, res) => {
+// Handle POST request to update items by ID and location  this need to get changed to put 
+app.put("/api/items/update", async (req, res) => {
     try {
         await mssql.connect(dbConfig);
         const result = await mssql.query(
@@ -120,8 +120,8 @@ app.post("/api/epacks/query", async (req, res) => {
     }
 });
 
-// Handle POST request to update epack by ID and location
-app.post("/api/epacks/update", async (req, res) => {
+// Handle POST request to update epack by ID and location (change this to put)
+app.put("/api/epacks/update", async (req, res) => {
     try {
         await mssql.connect(dbConfig);
         const result = await mssql.query(
