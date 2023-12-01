@@ -98,7 +98,6 @@ const queriesEmergencyPacksInsert = [
     "INSERT INTO EMERGENCY_PACKS (item_name, quantity, location_id) VALUES ('E-PACK', 10, 19);",
     "INSERT INTO EMERGENCY_PACKS (item_name, quantity, location_id) VALUES ('E-PACK', 10, 20);",
     "INSERT INTO EMERGENCY_PACKS (item_name, quantity, location_id) VALUES ('E-PACK', 10, 21);",
-    "INSERT INTO EMERGENCY_PACKS (item_name, quantity, location_id) VALUES ('E-PACK', 10, 22);"
 ];
 
 // Function to hash passwords using bcrypt
