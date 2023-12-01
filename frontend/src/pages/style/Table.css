@@ -1,0 +1,33 @@
+h1{
+    display: flex;
+    justify-content: center;
+}
+  
+.dynamic-box{
+    background-color: #dbd5cd87; 
+    padding: 50px; 
+    margin-left: 200px;
+    margin-right: 200px;
+    min-height: max-content;
+    min-width: max-content;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid #dbd5cd;
+    background-color: #ffffff;
+  }
+  
+  .table th,
+  .table td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #dbd5cd;
+    background-color: #ffffff;
+  }
+  
+  .table th {
+    background-color: #dbd5cd;
+    font-weight: bold;
+  }

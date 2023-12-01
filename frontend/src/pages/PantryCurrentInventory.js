@@ -1,58 +1,55 @@
 import React, { useState, useEffect } from 'react';
-import NavBar from './NavBar';
 import axios from 'axios';
+import NavBar from './NavBar';
+import './style/Table.css';
 
 const PantryCurrentInventory = () => {
-  const [items, setItems] = useState([]);
+  const [responseData, setResponseData] = useState(null);
 
   useEffect(() => {
-    const fetchItems = async () => {
+    const fetchData = async () => {
       try {
-        // Make a POST request to your backend API endpoint
-        
-        const response = await axios.post('/api/items/query', {
-          location_id: 1 // Replace with the appropriate location ID or pass it dynamically
+        const apiUrl = 'http://20.84.215.228:3000/api/items/query';
+        const response = await axios.post(apiUrl, {
+          location_id: 1
         });
-
-        setItems(response.data); // Set the retrieved items in state
+        setResponseData(response.data);
+        console.log(response.data);
       } catch (error) {
-        console.error('Error fetching items:', error);
+        console.error('Error:', error);
       }
     };
 
-    fetchItems();
+    fetchData();
   }, []);
 
   return (
     <div>
-        <NavBar />
+      <NavBar />
       <h1>Pantry Current Inventory</h1>
 
-     <div class="dynamic-box">
-
-     <h2>Items Table</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>Item_name</th>
-            <th>quantity</th>
-            {/* Add other table headers based on your item structure */}
-          </tr>
-        </thead>
-        <tbody>
-          {items.map((item) => (
-            <tr key={item.item_id}>
-              <td>{item.item_name}</td>
-              <td>{item.quantity}</td>
-              {/* Render other data fields accordingly */}
+      <div className="dynamic-box">
+        <table class="table" >
+          <thead>
+            <tr>
+              <th>Item Name</th>
+              <th>Quantity</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
-
-    </div>
+          </thead>
+          <tbody>
+            {responseData &&
+              responseData.map((dataItem, index) => (
+                <tr key={index}>
+                  <td>{dataItem.item_name}</td>
+                  <td>{dataItem.quantity}</td>
+                </tr>
+              ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };
+
 
 export default PantryCurrentInventory;
