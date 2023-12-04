@@ -81,14 +81,17 @@ app.post("/api/items/low-stock", async (req, res) => {
     }
 });
 
-// Handle POST request to update items by ID and location 
+// Handle POST request to update items by ID and location
 app.put("/api/items/update", async (req, res) => {
     try {
         await mssql.connect(dbConfig);
-        const result = await mssql.query(
+        const resultUpdate = await mssql.query(
             `UPDATE ITEMS SET quantity = ${req.body.new_stock_level} WHERE item_id = ${req.body.item_id} AND location_id = ${req.body.location_id}`
         );
-        res.json(result.recordset);
+        const result = await mssql.query(
+            `SELECT * FROM ITEMS WHERE location_id = ${req.body.location_id}`
+        );
+        res.status(200).json(result.recordset);
     } catch (err) {
         console.error(err);
         // Log info about the error
@@ -102,19 +105,22 @@ app.put("/api/items/update", async (req, res) => {
     }
 });
 
-// Handle put request to add items
-
+// Handle PUT request to add items
 app.put("/api/items/update/add", async (req, res) => {
     try {
         await mssql.connect(dbConfig);
 
         let new_quantity = req.body.add_quantity;
-        const newStockLevel = req.body.current_stock_level + req.body.adjustment + new_quantity;
+        const newStockLevel =
+            req.body.current_stock_level + req.body.adjustment + new_quantity;
 
-        const result = await mssql.query(
+        const resultUpdate = await mssql.query(
             `UPDATE EMERGENCY_PACKS SET quantity = ${newStockLevel} WHERE pack_id = ${req.body.pack_id} AND location_id = ${req.body.location_id}`
         );
-        res.json(result.recordset);
+        const result = await mssql.query(
+            `SELECT * FROM ITEMS WHERE location_id = ${req.body.location_id}`
+        );
+        res.status(200).json(result.recordset);
     } catch (err) {
         console.error(err);
         // Log info about the error
@@ -128,19 +134,23 @@ app.put("/api/items/update/add", async (req, res) => {
     }
 });
 
-// Handle put request to subtract items 
-
+// Handle PUT request to subtract items
 app.put("/api/items/update/subtract", async (req, res) => {
     try {
         await mssql.connect(dbConfig);
 
         let subtract_quantity = req.body.subtract_quantity;
-        const newStockLevel = req.body.current_stock_level + req.body.adjustment - subtract_quantity;
-
-        const result = await mssql.query(
+        const newStockLevel =
+            req.body.current_stock_level +
+            req.body.adjustment -
+            subtract_quantity;
+        const resultUpdate = await mssql.query(
             `UPDATE EMERGENCY_PACKS SET quantity = ${newStockLevel} WHERE pack_id = ${req.body.pack_id} AND location_id = ${req.body.location_id}`
         );
-        res.json(result.recordset);
+        const result = await mssql.query(
+            `SELECT * FROM ITEMS WHERE location_id = ${req.body.location_id}`
+        );
+        res.status(200).json(result.recordset);
     } catch (err) {
         console.error(err);
         // Log info about the error
@@ -153,7 +163,6 @@ app.put("/api/items/update/subtract", async (req, res) => {
         await mssql.close();
     }
 });
-
 
 // Handle POST request to query all epacks
 app.post("/api/epacks/query", async (req, res) => {
@@ -173,14 +182,17 @@ app.post("/api/epacks/query", async (req, res) => {
     }
 });
 
-// Handle Put request to update epack by ID and location
+// Handle PUT request to update epack by ID and location
 app.put("/api/epacks/update", async (req, res) => {
     try {
         await mssql.connect(dbConfig);
-        const result = await mssql.query(
+        const resultUpdate = await mssql.query(
             `UPDATE EMERGENCY_PACKS SET quantity = ${req.body.new_stock_level} WHERE pack_id = ${req.body.pack_id} AND location_id = ${req.body.location_id}`
         );
-        res.json(result.recordset);
+        const result = await mssql.query(
+            `SELECT LOCATIONS.name AS location_name, quantity FROM EMERGENCY_PACKS JOIN LOCATIONS ON EMERGENCY_PACKS.location_id = LOCATIONS.location_id;`
+        );
+        res.status(200).json(result.recordset);
     } catch (err) {
         console.error(err);
         // Log info about the error
@@ -194,19 +206,21 @@ app.put("/api/epacks/update", async (req, res) => {
     }
 });
 
-// Handle put request to add new epack by ID and location
-
+// Handle PUT request to add new epack by ID and location
 app.put("/api/epacks/update/add", async (req, res) => {
     try {
         await mssql.connect(dbConfig);
 
         let new_quantity = req.body.add_quantity;
-        const newStockLevel = req.body.current_stock_level + req.body.adjustment + new_quantity;
-
-        const result = await mssql.query(
+        const newStockLevel =
+            req.body.current_stock_level + req.body.adjustment + new_quantity;
+        const resultUpdate = await mssql.query(
             `UPDATE EMERGENCY_PACKS SET quantity = ${newStockLevel} WHERE pack_id = ${req.body.pack_id} AND location_id = ${req.body.location_id}`
         );
-        res.json(result.recordset);
+        const result = await mssql.query(
+            `SELECT LOCATIONS.name AS location_name, quantity FROM EMERGENCY_PACKS JOIN LOCATIONS ON EMERGENCY_PACKS.location_id = LOCATIONS.location_id;`
+        );
+        res.status(200).json(result.recordset);
     } catch (err) {
         console.error(err);
         // Log info about the error
@@ -220,19 +234,23 @@ app.put("/api/epacks/update/add", async (req, res) => {
     }
 });
 
-// Handle put request to subtract new epack by ID and location
-
+// Handle PUT request to subtract new epack by ID and location
 app.put("/api/epacks/update/subtract", async (req, res) => {
     try {
         await mssql.connect(dbConfig);
 
         let subtract_quantity = req.body.subtract_quantity;
-        const newStockLevel = req.body.current_stock_level + req.body.adjustment - subtract_quantity;
-
-        const result = await mssql.query(
+        const newStockLevel =
+            req.body.current_stock_level +
+            req.body.adjustment -
+            subtract_quantity;
+        const resultUpdate = await mssql.query(
             `UPDATE EMERGENCY_PACKS SET quantity = ${newStockLevel} WHERE pack_id = ${req.body.pack_id} AND location_id = ${req.body.location_id}`
         );
-        res.json(result.recordset);
+        const result = await mssql.query(
+            `SELECT LOCATIONS.name AS location_name, quantity FROM EMERGENCY_PACKS JOIN LOCATIONS ON EMERGENCY_PACKS.location_id = LOCATIONS.location_id;`
+        );
+        res.status(200).json(result.recordset);
     } catch (err) {
         console.error(err);
         // Log info about the error
@@ -245,7 +263,6 @@ app.put("/api/epacks/update/subtract", async (req, res) => {
         await mssql.close();
     }
 });
-
 
 // Handle POST request to check for low epack levels
 app.post("/api/epacks/low-stock", async (req, res) => {
@@ -287,14 +304,7 @@ app.post("/api/epacks/empty", async (req, res) => {
     }
 });
 
-//This handles calculation to update our items table. 
-
-
-
 // Start the server
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
-
-    console.log("Server: " + DB_SERVER);
-    console.log("Database: " + DB_NAME);
 });
