@@ -10,7 +10,7 @@ const PantryLowInStock = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const apiUrl = 'http://20.12.134.62:3000/api/items/low-stock';
+        const apiUrl = 'http://172.169.88.113:3000/api/items/low-stock';
         const response = await axios.post(apiUrl, {
           location_id: 1,
           threshold: 11,
