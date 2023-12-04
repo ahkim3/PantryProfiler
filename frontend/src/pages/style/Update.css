@@ -10,12 +10,25 @@ h1{
     margin-right: 200px;
     min-height: max-content;
     min-width: max-content;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
 
 .form{
     display: flex;
     justify-content: center;
     text-align: center;
+    flex-direction: column;
+    align-items: center;
+    max-width: 100px;
+}
+
+p{
+    display: flex;
+    justify-content: center;
+    color: #9f9c97;
 }
 
 input[type="text"]::placeholder {
@@ -25,6 +38,7 @@ input[type="text"]::placeholder {
 }
 
 input[type="text"] {
+    margin-top: 15px;
     margin-bottom: 15px; 
     width: 500px;
     height: 50px;
@@ -36,7 +50,7 @@ input[type="text"] {
     text-align: center;
 }
 
-.button-submit{
+.button-submit {
     appearance: none;
     background-color: white;
     border: 3px solid #dbd5cd;
@@ -62,7 +76,7 @@ input[type="text"] {
     -webkit-user-select: none;
     touch-action: manipulation;
     will-change: transform;
-    justify-content: center;
+    align-self: flex-end; /* Align the button to the bottom of its container */
   }
   
 .button-submit:disabled {
@@ -80,3 +94,4 @@ input[type="text"] {
     box-shadow: none;
     transform: translateY(0);
 }
+
