@@ -169,7 +169,7 @@ app.post("/api/epacks/query", async (req, res) => {
     try {
         await mssql.connect(dbConfig);
         const result = await mssql.query(
-            `SELECT LOCATIONS.name AS location_name, quantity FROM EMERGENCY_PACKS JOIN LOCATIONS ON EMERGENCY_PACKS.location_id = LOCATIONS.location_id;`
+            `SELECT LOCATIONS.name AS location_name, EMERGENCY_PACKS.quantity, EMERGENCY_PACKS.pack_id, EMERGENCY_PACKS.location_id FROM EMERGENCY_PACKS JOIN LOCATIONS ON EMERGENCY_PACKS.location_id = LOCATIONS.location_id;`
         );
         res.json(result.recordset);
     } catch (err) {
