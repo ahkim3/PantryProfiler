@@ -13,7 +13,7 @@ const EPackLocations = () => {
 
   const fetchData = async () => {
     try {
-      const apiUrl = 'http://20.12.134.62:3000/api/epacks/query';
+      const apiUrl = 'http://172.169.88.113:3000/api/epacks/query';
       const response = await axios.post(apiUrl);
       const retrievedData = response.data.map(item => ({ ...item, isEditing: false }));
       setResponseData(retrievedData);
@@ -44,7 +44,7 @@ const EPackLocations = () => {
           if (dataItem.id) {
             try {
               const response = await axios.put(
-                `http://20.12.134.62:3000/api/epacks/update`,
+                `http://172.169.88.113:3000/api/epacks/update`,
                 {
                   pack_id: dataItem.pack_id,
                   location_id: dataItem.location_id,
