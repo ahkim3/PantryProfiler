@@ -9,7 +9,7 @@ const PantryCurrentInventory = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const apiUrl = 'http://20.12.134.62:3000/api/items/query';
+        const apiUrl = 'http://172.169.88.113:3000/api/items/query';
         const response = await axios.post(apiUrl, {
           location_id: 1
         });
