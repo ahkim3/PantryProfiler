@@ -321,6 +321,26 @@ app.post("/api/admins/query", async (req, res) => {
     }
 });
 
+// Handle POST request to query specific admin by ID (PawPrint)
+app.post("/api/admins/query/id", async (req, res) => {
+    try {
+        await mssql.connect(dbConfig);
+        const result = await mssql.query(
+            `SELECT * FROM ADMINS WHERE admin_id = '${req.body.admin_id}'`
+        );
+        res.json(result.recordset);
+    } catch (err) {
+        console.error(err);
+        // Log info about the error
+        console.log(
+            `Error occurred while querying admin with admin_id: ${req.body.admin_id}`
+        );
+        res.status(500).send("Internal Server Error");
+    } finally {
+        await mssql.close();
+    }
+});
+
 // Handle PUT request to add new admin by ID (PawPrint) and permission level
 app.put("/api/admins/add", async (req, res) => {
     try {
