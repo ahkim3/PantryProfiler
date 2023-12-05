@@ -2,19 +2,20 @@ const mssql = require("mssql"); // Azure connector API
 const bcrypt = require("bcrypt"); // Password encryption API
 const express = require("express"); // Express API
 
-// const dbConfig = require("./dbConfig"); // Config file holds DB credentials (relative path)
-// Grab DB credentials from environment variables
-const DB_SERVER = process.env.DB_SERVER;
-const DB_NAME = process.env.DB_NAME;
-const DB_USER = process.env.DB_USER;
-const DB_PASSWORD = process.env.DB_PASSWORD;
+const dbConfig = require("./dbConfig"); // Config file holds DB credentials (relative path)
 
-const dbConfig = {
-    server: DB_SERVER,
-    database: DB_NAME,
-    user: DB_USER,
-    password: DB_PASSWORD,
-};
+// Grab DB credentials from environment variables
+// const DB_SERVER = process.env.DB_SERVER;
+// const DB_NAME = process.env.DB_NAME;
+// const DB_USER = process.env.DB_USER;
+// const DB_PASSWORD = process.env.DB_PASSWORD;
+
+// const dbConfig = {
+//     server: DB_SERVER,
+//     database: DB_NAME,
+//     user: DB_USER,
+//     password: DB_PASSWORD,
+// };
 
 const app = express();
 const port = 3000;
@@ -298,6 +299,81 @@ app.post("/api/epacks/empty", async (req, res) => {
         // Log info about the error
         console.log("Error occurred while querying empty epacks");
         console.log(`location_id: ${req.body.location_id}`);
+        res.status(500).send("Internal Server Error");
+    } finally {
+        await mssql.close();
+    }
+});
+
+// Handle POST request to query all admins
+app.post("/api/admins/query", async (req, res) => {
+    try {
+        await mssql.connect(dbConfig);
+        const result = await mssql.query(`SELECT * FROM ADMINS`);
+        res.json(result.recordset);
+    } catch (err) {
+        console.error(err);
+        // Log info about the error
+        console.log("Error occurred while querying admins");
+        res.status(500).send("Internal Server Error");
+    } finally {
+        await mssql.close();
+    }
+});
+
+// Handle PUT request to add new admin by ID (PawPrint) and permission level
+app.put("/api/admins/add", async (req, res) => {
+    try {
+        await mssql.connect(dbConfig);
+
+        // Ensure admin_id is lowercase
+        let admin_id = req.body.admin_id.toLowerCase();
+
+        // Ensure permission level is one of three options: admin, volunteer, or epack
+        if (
+            req.body.permission_level !== "admin" &&
+            req.body.permission_level !== "volunteer" &&
+            req.body.permission_level !== "epack"
+        ) {
+            res.status(400).send("Invalid permission level");
+        }
+
+        const resultUpdate = await mssql.query(
+            `INSERT INTO ADMINS (admin_id, permission_level) VALUES ('${admin_id}', '${req.body.permission_level}')`
+        );
+        const result = await mssql.query(`SELECT * FROM ADMINS`);
+        res.status(200).json(result.recordset);
+    } catch (err) {
+        console.error(err);
+        // Log info about the error
+        console.log("Error occurred while adding admin");
+        console.log(
+            `admin_id: ${req.body.admin_id}, permission_level: ${req.body.permission_level}`
+        );
+        res.status(500).send("Internal Server Error");
+    } finally {
+        await mssql.close();
+    }
+});
+
+// Handle DELETE request to remove an admin by ID (PawPrint)
+app.delete("/api/admins/delete", async (req, res) => {
+    try {
+        await mssql.connect(dbConfig);
+
+        // Ensure admin_id is lowercase
+        let admin_id = req.body.admin_id.toLowerCase();
+
+        const resultUpdate = await mssql.query(
+            `DELETE FROM ADMINS WHERE admin_id = '${admin_id}'`
+        );
+        const result = await mssql.query(`SELECT * FROM ADMINS`);
+        res.status(200).json(result.recordset);
+    } catch (err) {
+        console.error(err);
+        // Log info about the error
+        console.log("Error occurred while deleting admin");
+        console.log(`admin_id: ${req.body.admin_id}`);
         res.status(500).send("Internal Server Error");
     } finally {
         await mssql.close();
