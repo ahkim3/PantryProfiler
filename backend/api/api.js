@@ -338,7 +338,19 @@ app.put("/api/admins/add", async (req, res) => {
             res.status(400).send("Invalid permission level");
         }
 
-        const resultUpdate = await mssql.query(
+        // Check if admin already exists in current database
+        const currentResult = await mssql.query(`SELECT * FROM ADMINS`);
+
+        // If admin already exists, return 400 error
+        for (let i = 0; i < currentResult.recordset.length; i++) {
+            if (currentResult.recordset[i].admin_id === admin_id) {
+                res.status(400).send(
+                    "Admin already exists. Must delete existing entry first."
+                );
+            }
+        }
+
+        const resultAdd = await mssql.query(
             `INSERT INTO ADMINS (admin_id, permission_level) VALUES ('${admin_id}', '${req.body.permission_level}')`
         );
         const result = await mssql.query(`SELECT * FROM ADMINS`);
