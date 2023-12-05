@@ -335,7 +335,7 @@ app.put("/api/admins/add", async (req, res) => {
             req.body.permission_level !== "volunteer" &&
             req.body.permission_level !== "epack"
         ) {
-            res.status(400).send("Invalid permission level");
+            throw "Invalid permission level";
         }
 
         // Check if admin already exists in current database
@@ -344,9 +344,7 @@ app.put("/api/admins/add", async (req, res) => {
         // If admin already exists, return 400 error
         for (let i = 0; i < currentResult.recordset.length; i++) {
             if (currentResult.recordset[i].admin_id === admin_id) {
-                res.status(400).send(
-                    "Admin already exists. Must delete existing entry first."
-                );
+                throw "Admin already exists. Must delete existing entry first.";
             }
         }
 
@@ -362,7 +360,17 @@ app.put("/api/admins/add", async (req, res) => {
         console.log(
             `admin_id: ${req.body.admin_id}, permission_level: ${req.body.permission_level}`
         );
-        res.status(500).send("Internal Server Error");
+        if (err == "Invalid permission level") {
+            res.status(400).send("Invalid permission level");
+        } else if (
+            err == "Admin already exists. Must delete existing entry first."
+        ) {
+            res.status(400).send(
+                "Admin already exists. Must delete existing entry first."
+            );
+        } else {
+            res.status(500).send("Internal Server Error");
+        }
     } finally {
         await mssql.close();
     }
