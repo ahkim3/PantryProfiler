@@ -110,7 +110,7 @@ const customStyles = {
               placeholder="Quantity"
               required
             />
-            <button className="button-submit" type="submit">
+            <button className="button-submit-update" type="submit">
               Update
             </button>
           </form>

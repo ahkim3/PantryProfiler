@@ -50,7 +50,7 @@ input[type="text"] {
     text-align: center;
 }
 
-.button-submit {
+.button-submit-update {
     appearance: none;
     background-color: white;
     border: 3px solid #dbd5cd;
@@ -82,19 +82,18 @@ input[type="text"] {
     margin-right: auto !important;;
   }
   
-.button-submit:disabled {
+.button-submit-update:disabled {
     pointer-events: none;
 }
   
-.button-submit:hover {
+.button-submit-update:hover {
     color: #9f9c97;
     background-color: #fff;
     box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
     transform: translateY(-2px);
 }
   
-.button-submit:active {
+.button-submit-update:active {
     box-shadow: none;
     transform: translateY(0);
 }
-

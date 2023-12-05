@@ -114,7 +114,7 @@ const PantryUpdate = () => {
               placeholder="Quantity"
               required
             />
-            <button className="button-submit" type="submit">Update</button>
+            <button className="button-submit-update" type="submit">Update</button>
           </form>
           {updateSuccess && <p>Update successful!</p>}
         </div>
