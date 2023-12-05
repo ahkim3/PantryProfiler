@@ -10,10 +10,10 @@ const PantryLowInStock = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const apiUrl = 'http://172.169.88.113:3000/api/items/low-stock';
+        const apiUrl = 'http://20.118.4.46:3000/api/items/low-stock';
         const response = await axios.post(apiUrl, {
           location_id: 1,
-          threshold: 11,
+          threshold: 5,
         });
         setResponseData(response.data);
         console.log(response.data);
@@ -31,7 +31,7 @@ const PantryLowInStock = () => {
       <h1>Pantry Low In Stock</h1>
 
       <div className="dynamic-box">
-        <table class="table">
+        <table className="table">
           <thead>
             <tr>
               <th>Item Name</th>
