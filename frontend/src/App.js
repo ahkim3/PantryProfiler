@@ -4,7 +4,6 @@ import MainMenu from "./pages/MainMenu";
 import EPackMenu from "./pages/EPackMenu";
 import PantryMenu from "./pages/PantryMenu";
 import EPackLocations from "./pages/EPackLocations";
-import EPackNotifications from "./pages/EPackNotifications";
 import EPackUpdate from "./pages/EPackUpdate";
 import PantryCurrentInventory from "./pages/PantryCurrentInventory";
 import PantryLowInStock from "./pages/PantryLowInStock";
@@ -24,10 +23,7 @@ const App = () => {
                     path="/pages/EPackLocations"
                     element={<EPackLocations />}
                 />
-                <Route
-                    path="/pages/EPackNotifications"
-                    element={<EPackNotifications />}
-                />
+                
                 <Route path="/pages/EPackUpdate" element={<EPackUpdate />} />
 
                 <Route

@@ -64,7 +64,7 @@ input[type="text"] {
     font-weight: 400;
     line-height: normal;
     min-width: 100px !important;
-    max-width: 100px !important; 
+    max-width: 100px !important;
     height: 50px; 
     line-height: 15px;
     padding: 10px;
@@ -97,3 +97,24 @@ input[type="text"] {
     box-shadow: none;
     transform: translateY(0);
 }
+
+
+.notification {
+    position: relative;
+    padding: 10px;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-top: 100px;
+  }
+  
+  .close-button {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    color: #888;
+  }

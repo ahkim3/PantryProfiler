@@ -16,9 +16,6 @@ const NavBar = () => {
                     <a href="/pages/EPackMenu">Emergency Packs</a>
                     <div className="dropdown-content">
                         <a href="/pages/EPackLocations">E-Pack Locations</a>
-                        <a href="/pages/EPackNotifications">
-                            E-Pack Notifications
-                        </a>
                         <a href="/pages/EPackUpdate">Update E-Pack</a>
                     </div>
                 </li>

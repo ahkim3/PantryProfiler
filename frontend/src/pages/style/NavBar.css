@@ -1,20 +1,19 @@
 .svg-container {
     display: flex;
     align-items: center;
-    height: 10vh; /* Adjust the height of the container as needed */
+    height: 10vh; 
 }
 img {
     height: 75px; 
     margin-right: 20px;
 }
-/* NavBar.css */
+
 .navbar {
     background-color: transparent;
     padding: 10px 20px;
     display:flex;
-    justify-content: space-between; 
+    justify-content: space-between !important; 
     align-items: center;
-
 }
   
 .nav-list {
@@ -26,9 +25,9 @@ img {
   
 .nav-item {
     margin-right: 20px;
-    justify-content: flex-end;
+    justify-content: space-between !important; 
 }
-  
+
 .nav-item a {
     color: black;
     text-decoration: none;
@@ -37,6 +36,7 @@ img {
 .dropdown {
     position: relative;
     padding-left: 20px;
+    justify-content: space-between !important; 
 }
   
 .dropdown-content {

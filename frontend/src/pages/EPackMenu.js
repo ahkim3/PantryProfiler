@@ -17,9 +17,6 @@ const EPackMenu = () => {
                 <Link to="/pages/EPackLocations">
                     <button className="button-p">E-Pack Locations</button>
                 </Link>
-                <Link to="/pages/EPackNotifications">
-                    <button className="button-p">E-Pack Notifications</button>
-                </Link>
                 <Link to="/pages/EPackUpdate">
                     <button className="button-p">Update E-Packs</button>
                 </Link>
