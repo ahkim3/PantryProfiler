@@ -1,11 +1,11 @@
 import React from 'react';
-import './style/NavBar.css'; // Import CSS for styling
+import './style/NavBar.css'; 
 import logo from '../logo.svg';
 
 const NavBar = () => {
   return (
     <nav className="navbar">
-        <div class='svg-container'>
+        <div className='svg-container'>
             <img src={logo} alt="Logo"/>
         </div>
       <ul className="nav-list">
@@ -23,10 +23,9 @@ const NavBar = () => {
         <li className="nav-item dropdown">
           <a href="/pages/PantryMenu">Pantry</a>
           <div className="dropdown-content">
-            <a href="/pages/PantryLowInStock">Low In Stock </a>
             <a href="/pages/PantryCurrentInventory">Current Inventory</a>
+            <a href="/pages/PantryLowInStock">Low In Stock </a>
             <a href="/pages/PantryUpdate">Update Inventory</a>
-            <a href="/pages/PantryTrending">Trending Items</a>
           </div>
         </li>
       </ul>
@@ -34,4 +33,5 @@ const NavBar = () => {
 
   );
 };
+
 export default NavBar;

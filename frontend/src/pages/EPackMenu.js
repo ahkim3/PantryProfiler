@@ -8,20 +8,20 @@ const EPackMenu = () => {
     <div>
         <NavBar />
 
-        <div class="title">
+        <div className="title">
             <h1>Emergency Food Pack Menu</h1>
         </div>
 
-        <div class="dynamic-box">
-            <div class="epack-button-pantry">
+        <div className="dynamic-box">
+            <div className="epack-button-pantry">
                 <Link to="/pages/EPackLocations">
-                    <button class="button-p">E-Pack Locations</button>
+                    <button className="button-p">E-Pack Locations</button>
                 </Link>
                 <Link to="/pages/EPackNotifications">
-                    <button class="button-p">E-Pack Notifications</button>
+                    <button className="button-p">E-Pack Notifications</button>
                 </Link>
                 <Link to="/pages/EPackUpdate">
-                    <button class="button-p">Update E-Packs</button>
+                    <button className="button-p">Update E-Packs</button>
                 </Link>
         </div>
         </div>
