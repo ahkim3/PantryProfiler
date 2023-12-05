@@ -13,10 +13,10 @@ const EPackUpdate = () => {
   useEffect(() => {
     const fetchOptions = async () => {
       try {
-        const response = await axios.post('http://172.169.88.113:3000/api/epacks/query');
+        const response = await axios.post('http://20.118.4.46:3000/api/epacks/query');
         const options = response.data.map((location) => ({
           label: location.location_name,
-          value: location.id,
+          value: location.pack_id,
           location_id: location.location_id,
           new_stock_level: location.new_stock_level, 
         }));
@@ -45,7 +45,7 @@ const EPackUpdate = () => {
     const currentStockLevel = selectedOption.new_stock_level || 0;
     const newStockLevel = currentStockLevel + parseInt(addQuantity);
 
-    const response = await axios.put('http://172.169.88.113:3000/api/epacks/update', {
+    const response = await axios.put('http://20.118.4.46:3000/api/epacks/update', {
       pack_id: selectedOption.value,
       location_id: selectedOption.location_id,
       new_stock_level: newStockLevel,
