@@ -420,6 +420,64 @@ app.delete("/api/admins/delete", async (req, res) => {
     }
 });
 
+// // Handle LDAP authentication 
+
+// const ldap = require('ldapjs');
+
+// // Middleware to parse JSON
+// app.use(express.json());
+
+// // LDAP server configuration
+// const ldapServer = 'ldap://umad.umsystem.edu:3268';
+// const ldapBaseDN = 'DC=umad,DC=umsystem,DC=edu';
+
+// // API endpoint for LDAP authentication
+// app.post('/api/login', (req, res) => {
+//   const { username, password } = req.body;
+
+//   // Create an LDAP client
+//   const client = ldap.createClient({
+//     url: ldapServer,
+//   });
+
+//   // Attempt to bind with the provided credentials
+//   client.bind(`CN=${username},OU=Distribution Groups,OU=UM,OU=UMAD Groups,${ldapBaseDN}`, password, (err) => {
+//     if (err) {
+//       // LDAP authentication failed
+//       console.error('LDAP Authentication Failed:', err);
+//       res.status(401).json({ error: 'Authentication failed' });
+//     } else {
+//       // LDAP authentication successful
+//       console.log('LDAP Authentication Successful');
+
+//       // Check the user's role and route to the appropriate page
+//       let pageToRedirect;
+
+//       switch (username) {
+//         case 'gc_tigerpantryprofiler_admin':
+//           pageToRedirect = '/admin', '/items', '/epacks'; // Route for admin page
+//           break;
+//         case 'gc_tigerpantryprofiler_volunteer':
+//           pageToRedirect = '/items', '/epacks'; // Route for volunteer page
+//           break;
+//         case 'gc_tigerpantryprofiler_epack':
+//           pageToRedirect = '/epacks'; // Route for ePack page
+//           break;
+//         default:
+//           pageToRedirect = '/'; // Default route (modify as needed)
+//       }
+
+//       // Close the LDAP connection
+//       client.unbind();
+
+//       // Respond with the route to redirect to
+//       res.json({ redirectTo: pageToRedirect });
+//     }
+//   });
+// });
+
+
+
 // Start the server
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
