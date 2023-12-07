@@ -1,4 +1,4 @@
-import {jwtDecode} from "jwt-decode"; // JWT decoder
+const jwt = require("jsonwebtoken"); // JWT decoding API
 const mssql = require("mssql"); // Azure connector API
 const express = require("express"); // Express API
 
@@ -424,7 +424,7 @@ app.delete("/api/admins/delete", async (req, res) => {
 app.post("/api/login/oauth", async (req, res) => {
     try {
         // Decode the Google ID token
-        const decodedToken = jwtDecode(req.body.token);
+        const decodedToken = jwt.decode(req.body.token);
 
         // Verify hd (hosted domain) is umsystem.edu, missouri.edu, umsl.edu, umkc.edu, or mst.edu
         if (
