@@ -81,7 +81,7 @@ const Admin = ({user}) => {
                                         <span
                                             style={{
                                                 cursor: "pointer",
-                                                color: "orange",
+                                                color: "#F1B82D",
                                                 fontSize: "27px",
                                                 fontWeight: "bold",
                                                 textAlign: "center",

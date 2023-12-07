@@ -38,11 +38,6 @@ const NavBar = ({user}) => {
                         <Link to="/pages/Admin">Admin</Link>
                     </li>
                 )}
-                <li className="nav-item">
-                    <Link to="/SignOut" className="signout-button">
-                        Sign Out
-                    </Link>
-                </li>
             </ul>
         </nav>
     );

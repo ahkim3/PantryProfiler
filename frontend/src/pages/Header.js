@@ -8,6 +8,9 @@ const NavBar = () => {
         <div className='png-container'>
             <img className='png' src={mizzou} alt="Mizzou"/>
         </div>
+        <Link to="../SignOut" className="signout-button">
+            Sign Out
+        </Link>
     </nav>
 
   );
