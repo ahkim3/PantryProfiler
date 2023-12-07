@@ -1,5 +1,4 @@
 const mssql = require("mssql"); // Azure connector API
-const bcrypt = require("bcrypt"); // Password encryption API
 const express = require("express"); // Express API
 const jwt = require("jwt-decode"); // JWT decoding API
 
