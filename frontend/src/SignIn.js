@@ -3,7 +3,7 @@ import axios from "axios";
 import {GoogleLogin} from "@react-oauth/google";
 import {jwtDecode} from "jwt-decode";
 import "./SignIn.css";
-import logo from "./img/welcomeLogo.svg";
+import logo from "./welcomeLogo.svg";
 
 // Import API_URL from config.js
 const config = require("./config.json");
