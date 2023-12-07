@@ -8,7 +8,6 @@ import {
 import axios from "axios";
 import SignIn from "./SignIn";
 import SignOut from "./SignOut";
-
 import MainMenu from "./pages/MainMenu";
 import EPackMenu from "./pages/EPackMenu";
 import PantryMenu from "./pages/PantryMenu";
