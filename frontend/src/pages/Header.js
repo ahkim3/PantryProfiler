@@ -1,6 +1,7 @@
 import React from 'react';
 import './style/NavBar.css'; 
 import mizzou from '../MU_UniversitySig_horiz_RGB_REV.png'
+import {Link} from "react-router-dom";
 
 const NavBar = () => {
   return (
