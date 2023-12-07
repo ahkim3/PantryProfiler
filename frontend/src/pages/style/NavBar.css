@@ -1,10 +1,10 @@
 .svg-container {
     display: flex;
     align-items: center;
-    height: 10vh; 
+    height: 10vh;
 }
 img {
-    height: 75px; 
+    height: 75px;
     margin-right: 20px;
 }
 
@@ -12,33 +12,33 @@ img {
     background-color: transparent;
     padding: 10px 20px;
     display:flex;
-    justify-content: space-between !important; 
+    justify-content: space-between !important;
     align-items: center;
 }
-  
+
 .nav-list {
     list-style: none;
     margin: 0;
     padding: 10px;
     display: flex;
 }
-  
+
 .nav-item {
     margin-right: 20px;
-    justify-content: space-between !important; 
+    justify-content: space-between !important;
 }
 
 .nav-item a {
     color: black;
     text-decoration: none;
 }
-  
+
 .dropdown {
     position: relative;
     padding-left: 20px;
-    justify-content: space-between !important; 
+    justify-content: space-between !important;
 }
-  
+
 .dropdown-content {
     display: none;
     position: absolute;
@@ -46,18 +46,26 @@ img {
     min-width: 100px;
     z-index: 1;
 }
-  
+
 .dropdown:hover .dropdown-content {
     display: block;
 }
-  
+
 .dropdown-content a {
     color: #333;
     padding: 12px 16px;
     text-decoration: none;
     display: block;
 }
-  
+
 .dropdown-content a:hover {
     background-color: #ddd;
+}
+
+.signout-button {
+    color: #fff;
+    background-color: rgb(255, 166, 0);
+    padding: 5px;
+    border-radius: 5px;
+    text-decoration: none;
 }

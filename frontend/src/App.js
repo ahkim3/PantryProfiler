@@ -7,6 +7,7 @@ import {
 } from "react-router-dom";
 import axios from "axios";
 import SignIn from "./SignIn";
+import SignOut from "./SignOut";
 
 import MainMenu from "./pages/MainMenu";
 import EPackMenu from "./pages/EPackMenu";
@@ -54,7 +55,7 @@ const App = () => {
 
     const PrivateRoute = ({element, requiredRoles}) => {
         // Check if the user is authenticated and has the required role
-        if (user && requiredRoles.includes(user.role)) {
+        if (user && user.role && requiredRoles.includes(user.role)) {
             return element;
         } else {
             // Redirect to the sign-in page if the user is not authenticated
@@ -146,11 +147,15 @@ const App = () => {
                     element={
                         <PrivateRoute
                             element={<Admin />}
-                            requiredRole={["admin"]}
+                            requiredRoles={["admin"]}
                         />
                     }
                 />
 
+                <Route
+                    path="/SignOut"
+                    element={<SignOut setUser={setUser} />} // Use the SignOut component
+                />
                 <Route
                     path="/"
                     element={user ? <MainMenu /> : <SignIn setUser={setUser} />}

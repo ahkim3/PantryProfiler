@@ -1,4 +1,5 @@
 import React from "react";
+import {Link} from "react-router-dom";
 import "./style/NavBar.css";
 import logo from "../logo.svg";
 
@@ -10,27 +11,32 @@ const NavBar = () => {
             </div>
             <ul className="nav-list">
                 <li className="nav-item">
-                    <a href="/">Home</a>
+                    <Link to="/">Home</Link>
                 </li>
                 <li className="nav-item dropdown">
-                    <a href="/pages/EPackMenu">Emergency Packs</a>
+                    <Link to="/pages/EPackMenu">Emergency Packs</Link>
                     <div className="dropdown-content">
-                        <a href="/pages/EPackLocations">E-Pack Locations</a>
-                        <a href="/pages/EPackUpdate">Update E-Pack</a>
+                        <Link to="/pages/EPackLocations">E-Pack Locations</Link>
+                        <Link to="/pages/EPackUpdate">Update E-Pack</Link>
                     </div>
                 </li>
                 <li className="nav-item dropdown">
-                    <a href="/pages/PantryMenu">Pantry</a>
+                    <Link to="/pages/PantryMenu">Pantry</Link>
                     <div className="dropdown-content">
-                        <a href="/pages/PantryCurrentInventory">
+                        <Link to="/pages/PantryCurrentInventory">
                             Current Inventory
-                        </a>
-                        <a href="/pages/PantryLowInStock">Low In Stock </a>
-                        <a href="/pages/PantryUpdate">Update Inventory</a>
+                        </Link>
+                        <Link to="/pages/PantryLowInStock">Low In Stock </Link>
+                        <Link to="/pages/PantryUpdate">Update Inventory</Link>
                     </div>
                 </li>
                 <li className="nav-item">
-                    <a href="/pages/admin">Admin</a>
+                    <Link to="/pages/Admin">Admin</Link>
+                </li>
+                <li className="nav-item">
+                    <Link to="/SignOut" className="signout-button">
+                        Sign Out
+                    </Link>
                 </li>
             </ul>
         </nav>
