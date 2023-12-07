@@ -8,7 +8,7 @@ import "./style/Update.css";
 const config = require("../config");
 const API_URL = config.API_URL;
 
-const Admin = () => {
+const Admin = ({user}) => {
     const [responseData, setResponseData] = useState([]);
     const [newAdminId, setNewAdminId] = useState("");
     const [newPermissionLevel, setNewPermissionLevel] = useState("");
@@ -55,7 +55,7 @@ const Admin = () => {
 
     return (
         <div>
-            <NavBar />
+            <NavBar user={user} />
             <h1>Admin</h1>
 
             <div className="dynamic-box">

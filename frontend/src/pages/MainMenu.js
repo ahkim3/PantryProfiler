@@ -87,22 +87,26 @@ const MainMenu = ({user}) => {
     };
     return (
         <div>
-            <NavBar />
+            <NavBar user={user} />
             <div className="title">
                 <h1>Main Menu</h1>
             </div>
 
             <div className="dynamic-box">
                 <div className="main-button-pantry">
-                    <Link to="./pages/PantryMenu">
-                        <button className="button-p">Pantry</button>
-                    </Link>
+                    {(user.role === "admin" || user.role === "volunteer") && (
+                        <Link to="./pages/PantryMenu">
+                            <button className="button-p">Pantry</button>
+                        </Link>
+                    )}
                     <Link to="./pages/EPackMenu">
                         <button className="button-p">Emergency Packs</button>
                     </Link>
-                    <Link to="./pages/Admin">
-                        <button className="button-p">Admin</button>
-                    </Link>
+                    {user.role === "admin" && (
+                        <Link to="./pages/Admin">
+                            <button className="button-p">Admin</button>
+                        </Link>
+                    )}
                 </div>
             </div>
 

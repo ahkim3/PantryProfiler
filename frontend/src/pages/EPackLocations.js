@@ -7,7 +7,7 @@ import "./style/Update.css";
 const config = require("../config");
 const API_URL = config.API_URL;
 
-const EPackLocations = () => {
+const EPackLocations = ({user}) => {
     const [editedData, setEditedData] = useState([]);
     const [updateSuccess, setUpdateSuccess] = useState(false);
     const [options, setOptions] = useState([]);
@@ -88,7 +88,7 @@ const EPackLocations = () => {
 
     return (
         <div>
-            <NavBar />
+            <NavBar user={user} />
             <h1>Emergency Pack Locations</h1>
 
             <div className="dynamic-box">

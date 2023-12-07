@@ -70,7 +70,7 @@ const App = () => {
                     path="/pages/EPackMenu"
                     element={
                         <PrivateRoute
-                            element={<EPackMenu />}
+                            element={<EPackMenu user={user} />}
                             requiredRoles={["admin", "volunteer", "epack"]}
                         />
                     }
@@ -79,7 +79,7 @@ const App = () => {
                     path="/pages/PantryMenu"
                     element={
                         <PrivateRoute
-                            element={<PantryMenu />}
+                            element={<PantryMenu user={user} />}
                             requiredRoles={["admin", "volunteer"]}
                         />
                     }
@@ -89,7 +89,7 @@ const App = () => {
                     path="/pages/EPackLocations"
                     element={
                         <PrivateRoute
-                            element={<EPackLocations />}
+                            element={<EPackLocations user={user} />}
                             requiredRoles={["admin", "volunteer", "epack"]}
                         />
                     }
@@ -98,7 +98,7 @@ const App = () => {
                     path="/pages/EPackUpdate"
                     element={
                         <PrivateRoute
-                            element={<EPackUpdate />}
+                            element={<EPackUpdate user={user} />}
                             requiredRoles={["admin", "volunteer", "epack"]}
                         />
                     }
@@ -108,7 +108,7 @@ const App = () => {
                     path="/pages/PantryCurrentInventory"
                     element={
                         <PrivateRoute
-                            element={<PantryCurrentInventory />}
+                            element={<PantryCurrentInventory user={user} />}
                             requiredRoles={["admin", "volunteer"]}
                         />
                     }
@@ -117,7 +117,7 @@ const App = () => {
                     path="/pages/PantryLowInStock"
                     element={
                         <PrivateRoute
-                            element={<PantryLowInStock />}
+                            element={<PantryLowInStock user={user} />}
                             requiredRoles={["admin", "volunteer"]}
                         />
                     }
@@ -126,7 +126,7 @@ const App = () => {
                     path="/pages/PantryUpdate"
                     element={
                         <PrivateRoute
-                            element={<PantryUpdate />}
+                            element={<PantryUpdate user={user} />}
                             requiredRoles={["admin", "volunteer"]}
                         />
                     }
@@ -136,7 +136,7 @@ const App = () => {
                     path="/pages/RequestEPack"
                     element={
                         <PrivateRoute
-                            element={<RequestEPack />}
+                            element={<RequestEPack user={user} />}
                             requiredRoles={["admin", "volunteer", "epack"]}
                         />
                     }
@@ -146,7 +146,7 @@ const App = () => {
                     path="/pages/Admin"
                     element={
                         <PrivateRoute
-                            element={<Admin />}
+                            element={<Admin user={user} />}
                             requiredRoles={["admin"]}
                         />
                     }

@@ -8,7 +8,7 @@ import "./style/Update.css";
 const config = require("../config");
 const API_URL = config.API_URL;
 
-const EPackUpdate = () => {
+const EPackUpdate = ({user}) => {
     const [options, setOptions] = useState([]);
     const [selectedOption, setSelectedOption] = useState(null);
     const [addQuantity, setAddQuantity] = useState("");
@@ -93,7 +93,7 @@ const EPackUpdate = () => {
 
     return (
         <div>
-            <NavBar />
+            <NavBar user={user} />
             <h1>Update Emergency Food Packs</h1>
             <div className="dynamic-box">
                 <div className="form">

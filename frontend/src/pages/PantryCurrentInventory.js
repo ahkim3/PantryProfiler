@@ -7,7 +7,7 @@ import "./style/Table.css";
 const config = require("../config");
 const API_URL = config.API_URL;
 
-const PantryCurrentInventory = () => {
+const PantryCurrentInventory = ({user}) => {
     const [editedData, setEditedData] = useState([]);
     const [updateSuccess, setUpdateSuccess] = useState(false);
     const [options, setOptions] = useState([]);
@@ -91,7 +91,7 @@ const PantryCurrentInventory = () => {
 
     return (
         <div>
-            <NavBar />
+            <NavBar user={user} />
             <h1>Pantry Current Inventory</h1>
 
             <div className="dynamic-box">

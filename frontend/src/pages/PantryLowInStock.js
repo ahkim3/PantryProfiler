@@ -7,7 +7,7 @@ import "./style/Table.css";
 const config = require("../config");
 const API_URL = config.API_URL;
 
-const PantryLowInStock = () => {
+const PantryLowInStock = ({user}) => {
     const [responseData, setResponseData] = useState(null);
 
     useEffect(() => {
@@ -30,7 +30,7 @@ const PantryLowInStock = () => {
 
     return (
         <div>
-            <NavBar />
+            <NavBar user={user} />
             <h1>Pantry Low In Stock</h1>
 
             <div className="dynamic-box">
