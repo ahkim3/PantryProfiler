@@ -1,0 +1,25 @@
+.signin-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f5f5f5;
+}
+
+.signin-title {
+    font-size: 2em;
+    margin-bottom: 20px;
+}
+
+.signin-button {
+    font-size: 1.2em;
+    padding: 10px 20px;
+}
+
+.signin-logo {
+    width: 250px;
+    height: auto;
+    margin-bottom: 50px;
+    margin-left: 20px;
+}

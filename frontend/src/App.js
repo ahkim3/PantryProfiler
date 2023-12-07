@@ -1,5 +1,13 @@
-import React from "react";
-import {BrowserRouter as Router, Routes, Route} from "react-router-dom";
+import React, {useEffect, useState} from "react";
+import {
+    BrowserRouter as Router,
+    Routes,
+    Route,
+    Navigate,
+} from "react-router-dom";
+import axios from "axios";
+import SignIn from "./SignIn";
+
 import MainMenu from "./pages/MainMenu";
 import EPackMenu from "./pages/EPackMenu";
 import PantryMenu from "./pages/PantryMenu";
@@ -11,34 +19,142 @@ import PantryUpdate from "./pages/PantryUpdate";
 import RequestEPack from "./pages/RequestEPack";
 import Admin from "./pages/Admin";
 
+// Import API_URL from config.js
+const config = require("./config.json");
+const API_URL = config.API_URL;
+
 const App = () => {
+    const [user, setUser] = useState(null);
+
+    useEffect(() => {
+        const token = localStorage.getItem("authToken");
+
+        // Authenticate token with backend (make a POST request to /login/oauth), if it exists
+        if (token) {
+            axios
+                .post(`${API_URL}/login/oauth`, {
+                    token: token,
+                })
+                .then((response) => {
+                    console.log(response);
+
+                    setUser({
+                        role: response.data.permissionLevel,
+                        pawprint: response.data.pawprint,
+                        name: response.data.name,
+                    });
+                })
+                .catch((error) => {
+                    console.error("Error:", error);
+                });
+        } else {
+            setUser(null);
+        }
+    }, []);
+
+    const PrivateRoute = ({element, requiredRoles}) => {
+        // Check if the user is authenticated and has the required role
+        if (user && requiredRoles.includes(user.role)) {
+            return element;
+        } else {
+            // Redirect to the sign-in page if the user is not authenticated
+            return <Navigate to="/" />;
+        }
+    };
+
     return (
         <Router>
             <Routes>
-                <Route path="/" element={<MainMenu />} />
-                <Route path="/pages/EPackMenu" element={<EPackMenu />} />
-                <Route path="/pages/PantryMenu" element={<PantryMenu />} />
+                <Route
+                    path="/pages/EPackMenu"
+                    element={
+                        <PrivateRoute
+                            element={<EPackMenu />}
+                            requiredRoles={["admin", "volunteer", "epack"]}
+                        />
+                    }
+                />
+                <Route
+                    path="/pages/PantryMenu"
+                    element={
+                        <PrivateRoute
+                            element={<PantryMenu />}
+                            requiredRoles={["admin", "volunteer"]}
+                        />
+                    }
+                />
 
                 <Route
                     path="/pages/EPackLocations"
-                    element={<EPackLocations />}
+                    element={
+                        <PrivateRoute
+                            element={<EPackLocations />}
+                            requiredRoles={["admin", "volunteer", "epack"]}
+                        />
+                    }
                 />
-                
-                <Route path="/pages/EPackUpdate" element={<EPackUpdate />} />
+                <Route
+                    path="/pages/EPackUpdate"
+                    element={
+                        <PrivateRoute
+                            element={<EPackUpdate />}
+                            requiredRoles={["admin", "volunteer", "epack"]}
+                        />
+                    }
+                />
 
                 <Route
                     path="/pages/PantryCurrentInventory"
-                    element={<PantryCurrentInventory />}
+                    element={
+                        <PrivateRoute
+                            element={<PantryCurrentInventory />}
+                            requiredRoles={["admin", "volunteer"]}
+                        />
+                    }
                 />
                 <Route
                     path="/pages/PantryLowInStock"
-                    element={<PantryLowInStock />}
+                    element={
+                        <PrivateRoute
+                            element={<PantryLowInStock />}
+                            requiredRoles={["admin", "volunteer"]}
+                        />
+                    }
                 />
-                <Route path="/pages/PantryUpdate" element={<PantryUpdate />} />
+                <Route
+                    path="/pages/PantryUpdate"
+                    element={
+                        <PrivateRoute
+                            element={<PantryUpdate />}
+                            requiredRoles={["admin", "volunteer"]}
+                        />
+                    }
+                />
 
-                <Route path="/pages/RequestEPack" element={<RequestEPack />} />
+                <Route
+                    path="/pages/RequestEPack"
+                    element={
+                        <PrivateRoute
+                            element={<RequestEPack />}
+                            requiredRoles={["admin", "volunteer", "epack"]}
+                        />
+                    }
+                />
 
-                <Route path="/pages/Admin" element={<Admin />} />
+                <Route
+                    path="/pages/Admin"
+                    element={
+                        <PrivateRoute
+                            element={<Admin />}
+                            requiredRole={["admin"]}
+                        />
+                    }
+                />
+
+                <Route
+                    path="/"
+                    element={user ? <MainMenu /> : <SignIn setUser={setUser} />}
+                />
             </Routes>
         </Router>
     );
