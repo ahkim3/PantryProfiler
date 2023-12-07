@@ -1,6 +1,7 @@
 const mssql = require("mssql"); // Azure connector API
 const bcrypt = require("bcrypt"); // Password encryption API
 const express = require("express"); // Express API
+const jwt = require("jwt-decode"); // JWT decoding API
 
 // const dbConfig = require("./dbConfig"); // Config file holds DB credentials (relative path)
 
@@ -420,7 +421,72 @@ app.delete("/api/admins/delete", async (req, res) => {
     }
 });
 
-// // Handle LDAP authentication 
+// Handle POST request to authenticate a user via Google OAuth 2.0. Takes in a token and returns permission level.
+app.post("/api/login/oauth", async (req, res) => {
+    try {
+        // Decode the Google ID token
+        const decodedToken = jwt(req.body.token);
+
+        // Verify hd (hosted domain) is umsystem.edu, missouri.edu, umsl.edu, umkc.edu, or mst.edu
+        if (
+            decodedToken.hd !== "umsystem.edu" &&
+            decodedToken.hd !== "missouri.edu" &&
+            decodedToken.hd !== "umsl.edu" &&
+            decodedToken.hd !== "umkc.edu" &&
+            decodedToken.hd !== "mst.edu"
+        ) {
+            throw "Invalid hosted domain";
+        }
+
+        // Grab PawPrint from email
+        let pawprint = decodedToken.email.split("@")[0].toLowerCase();
+
+        // Determine if the user is an admin, volunteer, epack, or none of the above
+        let permissionLevel;
+        await mssql.connect(dbConfig);
+        const result = await mssql.query(
+            `SELECT * FROM ADMINS WHERE admin_id = '${pawprint}'`
+        );
+        if (result.recordset.length > 0) {
+            permissionLevel = result.recordset[0].permission_level;
+        } else {
+            permissionLevel = "none";
+        }
+
+        // Ensure permission level is one of three options: admin, volunteer, or epack
+        if (
+            permissionLevel !== "admin" &&
+            permissionLevel !== "volunteer" &&
+            permissionLevel !== "epack"
+        ) {
+            throw "Invalid permission level";
+        }
+
+        // Return the permission level, PawPrint, and name
+        res.status(200).json({
+            permissionLevel: permissionLevel,
+            pawprint: pawprint,
+            name: decodedToken.name,
+        });
+    } catch (err) {
+        console.error(err);
+        // Log info about the error
+        console.log("Error occurred while authenticating user");
+        console.log(`token: ${req.body.token}`);
+
+        if (err == "Invalid hosted domain") {
+            res.status(400).send("Invalid hosted domain");
+        } else if (err == "Invalid permission level") {
+            res.status(400).send("Invalid permission level");
+        } else {
+            res.status(500).send("Internal Server Error");
+        }
+    } finally {
+        await mssql.close();
+    }
+});
+
+// // Handle LDAP authentication
 
 // const ldap = require('ldapjs');
 
@@ -475,8 +541,6 @@ app.delete("/api/admins/delete", async (req, res) => {
 //     }
 //   });
 // });
-
-
 
 // Start the server
 app.listen(port, () => {
