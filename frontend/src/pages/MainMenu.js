@@ -7,7 +7,7 @@ import "./style/Menu.css";
 const config = require("../config");
 const API_URL = config.API_URL;
 
-const MainMenu = () => {
+const MainMenu = ({user}) => {
     const [editedData, setEditedData] = useState([]);
     const [updateSuccess, setUpdateSuccess] = useState(false);
     const [options, setOptions] = useState([]);
@@ -147,6 +147,17 @@ const MainMenu = () => {
                                 ))}
                     </tbody>
                 </table>
+            </div>
+
+            <div className="greeting">
+                <p>
+                    Welcome,&nbsp;<b>{user.name}!</b>
+                </p>
+                <p>
+                    <i>
+                        Your permission level is:&nbsp;<b>{user.role}</b>
+                    </i>
+                </p>
             </div>
         </div>
     );

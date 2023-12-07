@@ -158,7 +158,13 @@ const App = () => {
                 />
                 <Route
                     path="/"
-                    element={user ? <MainMenu /> : <SignIn setUser={setUser} />}
+                    element={
+                        user ? (
+                            <MainMenu user={user} />
+                        ) : (
+                            <SignIn setUser={setUser} />
+                        )
+                    }
                 />
             </Routes>
         </Router>
