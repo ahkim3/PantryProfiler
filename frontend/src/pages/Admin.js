@@ -2,6 +2,8 @@ import React, {useState, useEffect} from "react";
 import axios from "axios";
 import Popup from "reactjs-popup";
 import NavBar from "./NavBar";
+import Header from './Header';
+import Header2 from './Header2';
 import "./style/Update.css";
 
 // Import API_URL from config.js
@@ -55,6 +57,8 @@ const Admin = ({user}) => {
 
     return (
         <div>
+            <Header />
+            <Header2 />
             <NavBar user={user} />
             <h1>Admin</h1>
 

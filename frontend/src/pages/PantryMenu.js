@@ -1,11 +1,15 @@
 import React from "react";
 import {Link} from "react-router-dom";
 import NavBar from "./NavBar";
+import Header from './Header';
+import Header2 from './Header2';
 import "./style/Menu.css";
 
 const PantryMenu = ({user}) => {
     return (
         <div>
+            <Header />
+            <Header2 />
             <NavBar user={user} />
             <div className="title">
                 <h1>Pantry Menu</h1>

@@ -2,6 +2,8 @@ import React, {useState, useEffect} from "react";
 import axios from "axios";
 import {Link} from "react-router-dom";
 import NavBar from "./NavBar";
+import Header from './Header';
+import Header2 from './Header2';
 import "./style/Menu.css";
 
 const config = require("../config");
@@ -87,6 +89,8 @@ const MainMenu = ({user}) => {
     };
     return (
         <div>
+            <Header />
+            <Header2 />
             <NavBar user={user} />
             <div className="title">
                 <h1>Main Menu</h1>

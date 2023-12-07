@@ -1,3 +1,15 @@
+.header{
+    height: 65px;
+    display: flex;
+    align-items: center;
+}
+
+.header2{
+    height: 120px;
+    display: flex;
+    align-items: center;
+}
+
 h1{
     display: flex;
     justify-content: center;

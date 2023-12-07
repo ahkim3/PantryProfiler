@@ -2,6 +2,8 @@ import React, {useState, useEffect} from "react";
 import axios from "axios";
 import Select from "react-select";
 import NavBar from "./NavBar";
+import Header from './Header';
+import Header2 from './Header2';
 import "./style/Update.css";
 
 // Import API_URL from config.js
@@ -96,6 +98,8 @@ const PantryUpdate = ({user}) => {
 
     return (
         <div>
+            <Header />
+            <Header2 />
             <NavBar user={user} />
             <h1>Pantry Update</h1>
             <div className="dynamic-box">

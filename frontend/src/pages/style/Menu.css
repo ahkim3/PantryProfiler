@@ -1,4 +1,11 @@
 
+.header{
+  background-color: black;
+}
+.header2{
+  background-color: white
+}
+
 h1{
   display: flex;
   justify-content: center;

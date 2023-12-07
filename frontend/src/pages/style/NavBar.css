@@ -1,15 +1,40 @@
 .svg-container {
     display: flex;
     align-items: center;
-    height: 10vh;
+    height: 15vh; 
+    padding: 10px;
 }
-img {
-    height: 75px;
-    margin-right: 20px;
+
+.png-container {
+    display: flex;
+    align-items: center;
+    height: 10vh; 
+    padding: 10px;
+}
+.header{
+    height: 65px;
+    display: flex;
+    align-items: center;
+}
+
+.header2{
+    height: 120px;
+    display: flex;
+    align-items: center;
+}
+
+.svg {
+    height: 75px; 
+    margin-left: 25px;
+}
+
+.png{
+    height: 50px;
+    margin-left: 20px;
 }
 
 .navbar {
-    background-color: transparent;
+    background-color: #F1B82D;
     padding: 10px 20px;
     display:flex;
     justify-content: space-between !important;
@@ -24,8 +49,9 @@ img {
 }
 
 .nav-item {
-    margin-right: 20px;
+    margin-left: 20px;
     justify-content: space-between !important;
+    font-weight: 400;
 }
 
 .nav-item a {
