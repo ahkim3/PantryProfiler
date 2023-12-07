@@ -91,11 +91,11 @@
 
 .signout-button {
     color: #fff;
-    background-color: rgb(255, 166, 0);
+    background-color: #F1B82D;
     padding: 5px;
     border-radius: 5px;
     text-decoration: none;
     margin-right: 20px;
     align-items: center;
-    justify-content: flex-end;
+    justify-content: flex-end !important;
 }
