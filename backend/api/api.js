@@ -1,6 +1,6 @@
+import {jwtDecode} from "jwt-decode"; // JWT decoder
 const mssql = require("mssql"); // Azure connector API
 const express = require("express"); // Express API
-const jwt = require("jwt-decode"); // JWT decoding API
 
 // const dbConfig = require("./dbConfig"); // Config file holds DB credentials (relative path)
 
