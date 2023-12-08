@@ -1,4 +1,6 @@
-# [Pantry Profiler](http://pantryprofiler.missouri.edu)
+# [Pantry Profiler](https://pantryprofiler.missouri.edu)
+
+[🔗pantryprofiler.missouri.edu](https://pantryprofiler.missouri.edu)
 
 IT4970W - Senior Capstone Design (Writing Intensive)
 
@@ -97,3 +99,8 @@ Pantry Profiler is a web application hosted database for managing stock and inve
 
 1. Visit [pantryprofiler.missouri.edu](pantryprofiler.missouri.edu) from a browser.
 2. See Usage section for more details about navigation and functionality
+
+
+## Final Video Presentation
+
+[![Final Video Presentation](https://img.youtube.com/vi/YoNsPN4oMTc/0.jpg)](https://www.youtube.com/watch?v=YoNsPN4oMTc)
