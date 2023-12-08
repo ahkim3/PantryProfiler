@@ -1,6 +1,6 @@
 # [Pantry Profiler](https://pantryprofiler.missouri.edu)
 
-[🔗pantryprofiler.missouri.edu](https://pantryprofiler.missouri.edu)
+🔗[pantryprofiler.missouri.edu](https://pantryprofiler.missouri.edu)
 
 IT4970W - Senior Capstone Design (Writing Intensive)
 
