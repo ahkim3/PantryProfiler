@@ -5,6 +5,8 @@ import {
     Route,
     Navigate,
 } from "react-router-dom";
+import {ToastContainer} from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 import SignIn from "./SignIn";
 import SignOut from "./SignOut";
@@ -64,6 +66,7 @@ const App = () => {
 
     return (
         <Router>
+            <ToastContainer />
             <Routes>
                 <Route
                     path="/pages/EPackMenu"

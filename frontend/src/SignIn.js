@@ -2,6 +2,8 @@ import React from "react";
 import axios from "axios";
 import {GoogleLogin} from "@react-oauth/google";
 import {jwtDecode} from "jwt-decode";
+import {toast, ToastContainer} from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import "./SignIn.css";
 import logo from "./welcomeLogo.svg";
 
@@ -34,6 +36,16 @@ const SignIn = ({setUser}) => {
                 window.location.href = "/pages/PantryMenu";
             })
             .catch((error) => {
+                // Check if response.status is 400 and if response.data is "Invalid permission level"
+                if (
+                    error.response.status === 400 &&
+                    error.response.data === "Invalid permission level"
+                ) {
+                    // Show a toast notification to the user
+                    toast.error(
+                        "You don't have the required permissions to login."
+                    );
+                }
                 console.error("Error:", error);
             });
     };
